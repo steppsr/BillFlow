@@ -22,11 +22,11 @@
 <details>
 <summary>Click to view screenshots</summary>
 
-- Dashboard Overview
-- Analytics View
-- Bill Management
-- Email Configuration
-- Backup System
+- ![Dashboard Overview](images/Dashboard.png)
+- ![Analytics View](images/Analytics.png)
+- ![Bill Management](images/BillManagement.png)
+- ![Email Configuration](images/EmailConfig.png)
+- ![Backup System](images/BackupSystem.png)
 
 </details>
 
