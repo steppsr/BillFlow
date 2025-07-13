@@ -1,0 +1,6 @@
+Action,Recurrance,Day,Name,Category,EstAmount
+*,M,15,PowerGrid Electric,Utilities,280.00
+*,M,1,Homestead Mortgage,Mortgage,1500.00
+=,M,5,StreamFlix Subscription,Subscription,15.99
+*,A,2025-12-31,Property Tax Annual,Tax,2000.00
+=,M,10,SafeGuard Auto Insurance,Insurance,95.00

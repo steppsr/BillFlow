@@ -1,0 +1,19 @@
+{
+  "billsPath": "./BillFlow_Bills.csv",
+  "trackerPath": "./BillFlow.txt",
+  "backupPath": "./BillFlow_Backups",
+  "daysWarning": 7,
+  "emailConfig": {
+    "enabled": false,
+    "emailAddress": "",
+    "smtpServer": "",
+    "smtpPort": 587,
+    "username": "",
+    "password": "",
+    "dailySummary": false,
+    "dueSoonAlerts": true,
+    "overdueWarnings": true,
+    "summaryTime": "08:00",
+    "alertDaysAhead": 3
+  }
+}
