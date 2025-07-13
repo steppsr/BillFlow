@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -4506,4 +4507,4514 @@ x 2025-07-07 TeleConnect (@auto on Premium Card) [Utilities] ;; 95.50`;
         };
     </script>
 </body>
+=======
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BillFlow - Personal Bill Management System</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0f0f23;
+            color: #e0e0e0;
+            line-height: 1.6;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+        
+        /* Sidebar Styles */
+        .sidebar {
+            width: 300px;
+            background: #1a1a2e;
+            border-right: 1px solid #333;
+            overflow-y: auto;
+            transition: transform 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .sidebar.collapsed {
+            transform: translateX(-300px);
+        }
+        
+        .sidebar-header {
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid #333;
+        }
+        
+        .logo {
+            width: 150px;
+            height: auto;
+            margin-bottom: 10px;
+        }
+        
+        .logo-text {
+            font-size: 2em;
+            font-weight: bold;
+            background: linear-gradient(45deg, #4CAF50, #2196F3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .sidebar-section {
+            padding: 20px;
+            border-bottom: 1px solid #333;
+        }
+        
+        .sidebar-section h3 {
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            color: #4CAF50;
+        }
+        
+        .sidebar-section p {
+            font-size: 0.9em;
+            color: #aaa;
+            margin-bottom: 10px;
+        }
+        
+        .sidebar button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            background: #252540;
+            border: 1px solid #333;
+            color: #e0e0e0;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .sidebar button:hover {
+            background: #2196F3;
+        }
+        
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+            position: relative;
+        }
+        
+        .sidebar-toggle {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 40px;
+            height: 40px;
+            background: #1a1a2e;
+            border: 1px solid #333;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 100;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-left: 50px;
+        }
+        
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        h1 {
+            font-size: 2.5em;
+            background: linear-gradient(45deg, #4CAF50, #2196F3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal.active {
+            display: flex;
+        }
+        
+        .modal-content {
+            background: #1a1a2e;
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 30px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .modal-header h2 {
+            color: #4CAF50;
+        }
+        
+        .close-modal {
+            background: #333;
+            color: #e0e0e0;
+            border: 1px solid #555;
+            padding: 8px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .close-modal:hover {
+            background: #555;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 0.9em;
+            color: #aaa;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            background: #252540;
+            border: 1px solid #333;
+            border-radius: 6px;
+            color: #e0e0e0;
+            font-size: 16px;
+        }
+        
+        .form-group textarea {
+            min-height: 100px;
+            font-family: monospace;
+            font-size: 14px;
+        }
+        
+        .form-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+        }
+        
+        .btn-primary {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        
+        .btn-secondary {
+            background: #333;
+            color: #e0e0e0;
+            border: 1px solid #555;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        
+        /* Existing styles continue below */
+        .auto-refresh-status {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.9em;
+            color: #888;
+        }
+        
+        .refresh-indicator {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #4CAF50;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.3; }
+            100% { opacity: 1; }
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .stat-card {
+            background: #1a1a2e;
+            border-radius: 12px;
+            padding: 25px;
+            text-align: center;
+            border: 1px solid #333;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        
+        .stat-value {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        
+        .stat-label {
+            color: #888;
+            text-transform: uppercase;
+            font-size: 0.9em;
+            letter-spacing: 1px;
+        }
+        
+        .upcoming { color: #f44336; }
+        .due-soon { color: #ff9800; }
+        .scheduled { color: #2196F3; }
+        .paid { color: #4CAF50; }
+        
+        .bills-section {
+            margin-bottom: 40px;
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 10px;
+            background: #1a1a2e;
+            border-radius: 8px;
+        }
+        
+        .bill-list {
+            background: #1a1a2e;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #333;
+        }
+        
+        .bill-item {
+            display: grid;
+            grid-template-columns: 30px 1fr 100px 120px 100px 100px 80px;
+            gap: 15px;
+            padding: 15px 20px;
+            border-bottom: 1px solid #333;
+            align-items: center;
+            transition: background 0.3s;
+        }
+        
+        .bill-item:hover {
+            background: #252540;
+        }
+        
+        .bill-item:last-child {
+            border-bottom: none;
+        }
+        
+        .status-dot {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            margin: 0 auto;
+        }
+        
+        .status-dot.overdue { background: #f44336; }
+        .status-dot.due-soon { background: #ff9800; }
+        .status-dot.upcoming { background: #f44336; }
+        .status-dot.scheduled { background: #2196F3; }
+        .status-dot.paid { background: #4CAF50; }
+        
+        .bill-name {
+            font-weight: 500;
+        }
+        
+        .bill-category {
+            font-size: 0.85em;
+            color: #888;
+            background: #252540;
+            padding: 3px 10px;
+            border-radius: 12px;
+            text-align: center;
+        }
+        
+        .bill-date {
+            color: #888;
+            font-size: 0.9em;
+        }
+        
+        .bill-amount {
+            text-align: right;
+            font-weight: 600;
+        }
+        
+        .controls {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        input, select, button {
+            padding: 10px 20px;
+            background: #1a1a2e;
+            border: 1px solid #333;
+            border-radius: 6px;
+            color: #e0e0e0;
+            font-size: 16px;
+        }
+        
+        button {
+            cursor: pointer;
+            background: #2196F3;
+            border: none;
+            transition: background 0.3s;
+        }
+        
+        button:hover {
+            background: #1976D2;
+        }
+        
+        .toggle-switch {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .switch {
+            position: relative;
+            width: 50px;
+            height: 24px;
+            background: #333;
+            border-radius: 24px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .switch.active {
+            background: #4CAF50;
+        }
+        
+        .switch-slider {
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 20px;
+            height: 20px;
+            background: white;
+            border-radius: 50%;
+            transition: left 0.3s;
+        }
+        
+        .switch.active .switch-slider {
+            left: 28px;
+        }
+        
+        #fileInput {
+            display: none;
+        }
+        
+        .chart-container {
+            background: #1a1a2e;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 40px;
+            border: 1px solid #333;
+            transition: all 0.3s ease;
+        }
+        
+        .chart-container.collapsed {
+            padding: 15px 20px;
+        }
+        
+        .chart-container.collapsed .chart-wrapper {
+            display: none;
+        }
+        
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .chart-toggle {
+            cursor: pointer;
+            padding: 5px 10px;
+            background: #252540;
+            border-radius: 6px;
+            font-size: 0.9em;
+            transition: background 0.3s;
+        }
+        
+        .chart-toggle:hover {
+            background: #333;
+        }
+        
+        canvas {
+            max-height: 400px;
+        }
+        
+        .legend {
+            display: flex;
+            gap: 20px;
+            margin-top: 20px;
+            font-size: 0.9em;
+            flex-wrap: wrap;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .legend-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        
+        /* Code block styles */
+        .code-block {
+            background: #252540;
+            border: 1px solid #333;
+            border-radius: 6px;
+            padding: 15px;
+            font-family: monospace;
+            font-size: 0.85em;
+            overflow-x: auto;
+            margin: 10px 0;
+        }
+        
+        /* Bills Management Section */
+        .bills-management-section {
+            margin-bottom: 40px;
+            animation: slideDown 0.3s ease-out;
+        }
+        
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .management-card {
+            background: #1a1a2e;
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+        
+        .bill-form {
+            max-width: 100%;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .recurring-bills-list {
+            max-height: 400px;
+            overflow-y: auto;
+            border: 1px solid #333;
+            border-radius: 8px;
+        }
+        
+        .recurring-bill-item {
+            display: grid;
+            grid-template-columns: 1fr auto auto auto auto 60px;
+            gap: 15px;
+            padding: 15px 20px;
+            border-bottom: 1px solid #333;
+            align-items: center;
+            transition: background 0.3s;
+        }
+        
+        .recurring-bill-item:hover {
+            background: #252540;
+        }
+        
+        .recurring-bill-item:last-child {
+            border-bottom: none;
+        }
+        
+        .bill-info {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .bill-info-name {
+            font-weight: 500;
+            margin-bottom: 3px;
+        }
+        
+        .bill-info-details {
+            font-size: 0.85em;
+            color: #888;
+        }
+        
+        .bill-action-badge {
+            font-size: 0.8em;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+        
+        .bill-action-badge.manual {
+            background: #ff9800;
+            color: #000;
+        }
+        
+        .bill-action-badge.auto {
+            background: #4CAF50;
+            color: #fff;
+        }
+        
+        .edit-bill-btn {
+            background: #2196F3;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8em;
+        }
+        
+        .delete-bill-btn {
+            background: #f44336;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8em;
+        }
+        
+        .pay-bill-btn {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8em;
+            transition: background 0.3s;
+        }
+        
+        .pay-bill-btn:hover {
+            background: #45a049;
+        }
+        
+        .export-notice {
+            position: sticky;
+            bottom: 0;
+            z-index: 10;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .sidebar {
+                position: absolute;
+                z-index: 999;
+                height: 100%;
+            }
+            
+            .main-content {
+                padding: 10px;
+            }
+            
+            .container {
+                padding-left: 50px;
+            }
+            
+            .bill-item {
+                grid-template-columns: 30px 1fr 60px;
+                gap: 10px;
+            }
+            
+            .bill-category,
+            .bill-date:not(:first-of-type),
+            .bill-amount:not(:last-of-type) {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <img src="images/BillFLOW.png" alt="BillFlow Logo" class="logo" onerror="this.style.display='none'; document.getElementById('logoText').style.display='block';">
+            <div id="logoText" class="logo-text" style="display:none;">BillFlow</div>
+            <p style="font-size: 0.9em; color: #888; margin-top: 5px;">Personal Bill Management System</p>
+        </div>
+        
+        <div class="sidebar-section">
+            <h3>🚀 Getting Started</h3>
+            <p>Welcome to BillFlow! Here's how to get started:</p>
+            <ol style="font-size: 0.85em; color: #aaa; padding-left: 20px;">
+                <li>Click "Setup Configuration" to set your file paths</li>
+                <li>Add your recurring bills</li>
+                <li>Load or create your BillFlow.txt file</li>
+                <li>Run the PowerShell script daily to update bills</li>
+            </ol>
+        </div>
+        
+        <div class="sidebar-section">
+            <h3>⚙️ Configuration</h3>
+            <button onclick="showConfigModal()">Setup Configuration</button>
+            <button onclick="showEmailModal()">Configure Email Alerts</button>
+            <button onclick="exportConfig()">Export Configuration</button>
+        </div>
+        
+        <div class="sidebar-section">
+            <h3>💰 Manage Bills</h3>
+            <button onclick="showAddBillModal()">Add Recurring Bill</button>
+            <button onclick="showBillsListModal()">Edit Recurring Bills</button>
+            <button onclick="exportBillsCSV()">Export Bills to CSV</button>
+        </div>
+        
+        <div class="sidebar-section">
+            <h3>📊 Tools</h3>
+            <button onclick="generateSampleData()">Generate Sample Data</button>
+            <button onclick="showAnalyticsModal()">View Analytics</button>
+            <button onclick="showBackupModal()">Backup & Restore</button>
+        </div>
+        
+        <div class="sidebar-section">
+            <h3>ℹ️ Help</h3>
+            <button onclick="showHelpModal()">User Guide</button>
+            <button onclick="showAboutModal()">About BillFlow</button>
+            <div style="font-size: 0.8em; margin-top: 10px; text-align: center;">
+                Version 1.0.0<br>
+                Cross-platform compatible<br>
+                Windows • macOS • Linux
+            </div>
+        </div>
+    </div>
+    
+    <!-- Main Content -->
+    <div class="main-content">
+        <button class="sidebar-toggle" onclick="toggleSidebar()">☰</button>
+        
+        <div class="container">
+            <div class="header">
+                <h1>BillFlow Dashboard</h1>
+                <div class="auto-refresh-status">
+                    <div class="toggle-switch">
+                        <label>Auto-refresh</label>
+                        <div class="switch" id="autoRefreshToggle" onclick="toggleAutoRefresh()">
+                            <div class="switch-slider"></div>
+                        </div>
+                    </div>
+                    <div class="refresh-indicator" id="refreshIndicator" style="display: none;"></div>
+                    <span id="lastUpdate">Never updated</span>
+                </div>
+            </div>
+            
+            <div class="controls">
+                <button onclick="document.getElementById('fileInput').click()">Load BillFlow File</button>
+                <input type="file" id="fileInput" accept=".txt" onchange="handleFileLoad(event)">
+                <button onclick="refreshData()">Refresh Now</button>
+                <select id="monthFilter" onchange="filterBills()">
+                    <option value="active">Active Bills</option>
+                    <option value="all">All Bills (Including Paid)</option>
+                    <option value="paid">Completed Bills Only</option>
+                    <option value="current">Current Month</option>
+                    <option value="next">Next Month</option>
+                </select>
+                <select id="categoryFilter" onchange="filterBills()">
+                    <option value="all">All Categories</option>
+                </select>
+                <input type="text" id="searchBox" placeholder="Search bills..." oninput="filterBills()">
+            </div>
+            
+            <div class="stats-grid" id="statsGrid">
+                <div class="stat-card">
+                    <div class="stat-label">Total Active Bills</div>
+                    <div class="stat-value" id="totalBills">0</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Unpaid Bills</div>
+                    <div class="stat-value upcoming" id="upcomingBills">0</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Due Within 7 Days</div>
+                    <div class="stat-value due-soon" id="dueSoonBills">0</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Auto-Scheduled</div>
+                    <div class="stat-value scheduled" id="scheduledBills">0</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-label">Monthly Total</div>
+                    <div class="stat-value" id="monthlyTotal">$0</div>
+                </div>
+            </div>
+            
+            <div class="chart-container" id="chartContainer">
+                <div class="chart-header">
+                    <h2>Monthly Spending by Category</h2>
+                    <div class="chart-toggle" onclick="toggleChart()">
+                        <span id="chartToggleText">Hide Chart ▲</span>
+                    </div>
+                </div>
+                <div class="chart-wrapper">
+                    <canvas id="spendingChart"></canvas>
+                </div>
+            </div>
+            
+            <div class="bills-section">
+                <div class="section-header">
+                    <h2 id="billSectionTitle">Active Bills</h2>
+                    <span id="billCount">0 bills</span>
+                </div>
+                <div class="legend">
+                    <div class="legend-item">
+                        <div class="legend-dot status-dot upcoming"></div>
+                        <span>Unpaid (*)</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-dot status-dot due-soon"></div>
+                        <span>Due Soon (Y)</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-dot status-dot scheduled"></div>
+                        <span>Auto-Pay (=)</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-dot status-dot paid"></div>
+                        <span>Paid (x)</span>
+                    </div>
+                </div>
+                <div class="bill-list" id="billList">
+                    <div style="padding: 40px; text-align: center; color: #666;">
+                        Load your BillFlow.txt file to view bills
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Recurring Bills Management Section -->
+            <div class="bills-management-section" id="billsManagementSection" style="display: none;">
+                <div class="section-header">
+                    <h2>💰 Manage Recurring Bills</h2>
+                    <button onclick="hideBillsManagement()" class="btn-secondary" style="padding: 5px 15px;">Hide ✕</button>
+                </div>
+                
+                <!-- Add New Bill Form -->
+                <div class="management-card">
+                    <h3 style="color: #4CAF50; margin-bottom: 20px;">➕ Add New Recurring Bill</h3>
+                    <form onsubmit="addBillFromForm(event)" class="bill-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Bill Name</label>
+                                <input type="text" id="newBillName" placeholder="e.g., Netflix" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Category</label>
+                                <select id="newBillCategory" required>
+                                    <option value="">Select Category</option>
+                                    <option value="Utilities">Utilities</option>
+                                    <option value="Insurance">Insurance</option>
+                                    <option value="Credit Card">Credit Card</option>
+                                    <option value="Investment">Investment</option>
+                                    <option value="Mortgage">Mortgage</option>
+                                    <option value="Savings">Savings</option>
+                                    <option value="Subscription">Subscription</option>
+                                    <option value="Loan">Loan</option>
+                                    <option value="Tax">Tax</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Recurrence</label>
+                                <select id="newBillRecurrence" required>
+                                    <option value="M">Monthly</option>
+                                    <option value="A">Annual</option>
+                                    <option value="W">Weekly</option>
+                                    <option value="Q">Quarterly</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Day/Date</label>
+                                <input type="text" id="newBillDay" placeholder="15 for monthly, 2025-12-25 for annual" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Action Type</label>
+                                <select id="newBillAction" required>
+                                    <option value="*">Manual Payment (*)</option>
+                                    <option value="=">Auto-Payment (=)</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Estimated Amount</label>
+                                <input type="number" id="newBillAmount" step="0.01" placeholder="0.00">
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn-primary">Add Bill</button>
+                        </div>
+                    </form>
+                </div>
+                
+                <!-- Existing Bills List -->
+                <div class="management-card">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                        <h3 style="color: #2196F3;">📋 Existing Recurring Bills</h3>
+                        <div style="display: flex; gap: 10px;">
+                            <button onclick="document.getElementById('csvFileInput').click()" class="btn-secondary">Import CSV</button>
+                            <input type="file" id="csvFileInput" accept=".csv" onchange="importBillsCSV(event)" style="display: none;">
+                            <button onclick="exportBillsCSV()" class="btn-primary">Export CSV</button>
+                            <button onclick="refreshBillsList()" class="btn-secondary">Refresh</button>
+                        </div>
+                    </div>
+                    
+                    <div id="recurringBillsList" class="recurring-bills-list">
+                        <div style="padding: 20px; text-align: center; color: #666;">
+                            No recurring bills configured yet. Import your CSV file or add bills above!
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Export Notice -->
+                <div class="export-notice">
+                    <div style="background: #1a1a2e; border: 1px solid #4CAF50; border-radius: 8px; padding: 20px; margin-top: 20px;">
+                        <h4 style="color: #4CAF50; margin-bottom: 10px;">📤 Important: Export Required</h4>
+                        <p style="color: #aaa; margin-bottom: 15px;">
+                            After adding or editing bills, you must <strong>Export CSV</strong> and save it to your BillFlow application folder 
+                            (as <code>BillFlow_Bills.csv</code>) for the PowerShell script to use these bills.
+                        </p>
+                        <div style="display: flex; gap: 10px;">
+                            <button onclick="exportBillsCSV()" class="btn-primary">Export Bills CSV</button>
+                            <button onclick="exportConfig()" class="btn-secondary">Export Full Configuration</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modals -->
+    <div class="modal" id="configModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Configuration Settings</h2>
+                <button class="close-modal" onclick="closeModal('configModal')">Close ×</button>
+            </div>
+            <form onsubmit="saveConfig(event)">
+                <div class="form-group">
+                    <label>Bills CSV File Path</label>
+                    <input type="text" id="configBillsPath" placeholder="C:\BillFlow\BillFlow_Bills.csv" required>
+                </div>
+                <div class="form-group">
+                    <label>Tracker File Path</label>
+                    <input type="text" id="configTrackerPath" placeholder="C:\BillFlow\BillFlow.txt" required>
+                </div>
+                <div class="form-group">
+                    <label>Backup Folder Path</label>
+                    <input type="text" id="configBackupPath" placeholder="C:\BillFlow\Backups">
+                </div>
+                <div class="form-group">
+                    <label>Days Ahead Warning</label>
+                    <input type="number" id="configDaysWarning" value="7" min="1" max="30">
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" onclick="closeModal('configModal')">Cancel</button>
+                    <button type="submit" class="btn-primary">Save Configuration</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <div class="modal" id="emailModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Email Alert Configuration</h2>
+                <button class="close-modal" onclick="closeModal('emailModal')">Close ×</button>
+            </div>
+            <form onsubmit="saveEmailConfig(event)">
+                <div class="form-group">
+                    <div class="toggle-switch">
+                        <label>Enable Email Alerts</label>
+                        <div class="switch" id="emailEnabledToggle" onclick="toggleEmailEnabled()">
+                            <div class="switch-slider"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="emailConfigFields" style="display: none;">
+                    <div class="form-group">
+                        <label>Your Email Address</label>
+                        <input type="email" id="emailAddress" placeholder="your.email@example.com">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>SMTP Server</label>
+                        <input type="text" id="smtpServer" placeholder="smtp.gmail.com">
+                        <small style="color: #888; font-size: 0.8em;">Common servers: Gmail (smtp.gmail.com), Outlook (smtp-mail.outlook.com)</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>SMTP Port</label>
+                        <select id="smtpPort">
+                            <option value="587">587 (TLS)</option>
+                            <option value="465">465 (SSL)</option>
+                            <option value="25">25 (Standard)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Email Username</label>
+                        <input type="text" id="emailUsername" placeholder="Usually your email address">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Email Password / App Password</label>
+                        <input type="password" id="emailPassword" placeholder="Use app password for Gmail/Outlook">
+                        <small style="color: #888; font-size: 0.8em;">⚠️ For Gmail/Outlook, use an app-specific password, not your regular password</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Alert Settings</label>
+                        <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 10px;">
+                            <div class="toggle-switch">
+                                <label>Daily Summary Email</label>
+                                <div class="switch" id="dailySummaryToggle" onclick="toggleDailySummary()">
+                                    <div class="switch-slider"></div>
+                                </div>
+                            </div>
+                            <div class="toggle-switch">
+                                <label>Bills Due Soon Alerts</label>
+                                <div class="switch" id="dueSoonAlertsToggle" onclick="toggleDueSoonAlerts()">
+                                    <div class="switch-slider"></div>
+                                </div>
+                            </div>
+                            <div class="toggle-switch">
+                                <label>Overdue Bill Warnings</label>
+                                <div class="switch" id="overdueWarningsToggle" onclick="toggleOverdueWarnings()">
+                                    <div class="switch-slider"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Daily Summary Time</label>
+                        <input type="time" id="summaryTime" value="08:00">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Days Ahead for Alerts</label>
+                        <input type="number" id="alertDaysAhead" value="3" min="1" max="14">
+                        <small style="color: #888; font-size: 0.8em;">Send alerts this many days before bills are due</small>
+                    </div>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" onclick="testEmailConfig()">Test Email</button>
+                    <button type="button" class="btn-secondary" onclick="closeModal('emailModal')">Cancel</button>
+                    <button type="submit" class="btn-primary">Save Configuration</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <div class="modal" id="backupModal">
+        <div class="modal-content" style="max-width: 600px;">
+            <div class="modal-header">
+                <h2>🗄️ Backup & Restore</h2>
+                <button class="close-modal" onclick="closeModal('backupModal')">Close ×</button>
+            </div>
+            
+            <!-- Backup Section -->
+            <div style="margin-bottom: 30px;">
+                <h3 style="color: #4CAF50; margin-bottom: 15px;">📦 Create Backup</h3>
+                
+                <div style="background: #252540; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+                    <div class="form-group" style="margin-bottom: 15px;">
+                        <label>Backup Type</label>
+                        <select id="backupType" onchange="updateBackupOptions()">
+                            <option value="quick">Quick Backup (Settings & Bills Only)</option>
+                            <option value="complete">Complete Backup (All Data + Files)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group" style="margin-bottom: 15px;">
+                        <div class="toggle-switch">
+                            <label>Include Email Password (Security Risk)</label>
+                            <div class="switch" id="includePasswordToggle" onclick="toggleIncludePassword()">
+                                <div class="switch-slider"></div>
+                            </div>
+                        </div>
+                        <small style="color: #ff9800; font-size: 0.8em;">⚠️ Only enable if backup will be stored securely</small>
+                    </div>
+                    
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <div class="toggle-switch">
+                            <label>Save to Browser Storage (Local Backup)</label>
+                            <div class="switch" id="saveToBrowserToggle" onclick="toggleSaveToBrowser()">
+                                <div class="switch-slider"></div>
+                            </div>
+                        </div>
+                        <small style="color: #888; font-size: 0.8em;">Keeps backup in browser for quick restore</small>
+                    </div>
+                </div>
+                
+                <div style="display: flex; gap: 10px;">
+                    <button onclick="createBackup()" class="btn-primary">Create Backup</button>
+                    <button onclick="showBackupPreview()" class="btn-secondary">Preview Backup</button>
+                </div>
+            </div>
+            
+            <!-- Restore Section -->
+            <div style="border-top: 1px solid #333; padding-top: 20px;">
+                <h3 style="color: #2196F3; margin-bottom: 15px;">🔄 Restore Data</h3>
+                
+                <!-- Local Backups -->
+                <div style="margin-bottom: 20px;">
+                    <h4 style="color: #888; margin-bottom: 10px;">Browser Backups</h4>
+                    <div id="localBackupsList" style="background: #252540; padding: 15px; border-radius: 8px; max-height: 150px; overflow-y: auto;">
+                        <div style="color: #666; text-align: center;">No local backups found</div>
+                    </div>
+                </div>
+                
+                <!-- File Upload Restore -->
+                <div style="margin-bottom: 20px;">
+                    <h4 style="color: #888; margin-bottom: 10px;">Restore from File</h4>
+                    <div style="display: flex; gap: 10px; align-items: center;">
+                        <button onclick="document.getElementById('restoreFileInput').click()" class="btn-secondary">
+                            Choose Backup File
+                        </button>
+                        <input type="file" id="restoreFileInput" accept=".zip,.json" onchange="handleRestoreFile(event)" style="display: none;">
+                        <span id="restoreFileName" style="color: #888; font-size: 0.9em;">No file selected</span>
+                    </div>
+                </div>
+                
+                <!-- Restore Options -->
+                <div id="restoreOptions" style="display: none; background: #252540; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
+                    <h4 style="color: #4CAF50; margin-bottom: 10px;">Restore Options</h4>
+                    <div style="display: flex; flex-direction: column; gap: 8px;">
+                        <label style="display: flex; align-items: center; gap: 8px;">
+                            <input type="checkbox" id="restoreSettings" checked>
+                            <span>Configuration & Settings</span>
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 8px;">
+                            <input type="checkbox" id="restoreBills" checked>
+                            <span>Recurring Bills</span>
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 8px;">
+                            <input type="checkbox" id="restoreTrackerData">
+                            <span>Tracker File Data (if available)</span>
+                        </label>
+                    </div>
+                    
+                    <div style="margin-top: 15px;">
+                        <label>Restore Mode</label>
+                        <select id="restoreMode">
+                            <option value="merge">Merge with existing data</option>
+                            <option value="replace">Replace all existing data</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div style="display: flex; gap: 10px;">
+                    <button onclick="performRestore()" class="btn-primary" id="restoreButton" disabled>
+                        Restore Data
+                    </button>
+                    <button onclick="clearLocalBackups()" class="btn-secondary">
+                        Clear Local Backups
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Backup Info -->
+            <div style="border-top: 1px solid #333; padding-top: 20px; margin-top: 20px;">
+                <h4 style="color: #888; margin-bottom: 10px;">📊 Current Data Summary</h4>
+                <div style="background: #1a1a2e; padding: 15px; border-radius: 8px; font-size: 0.9em;">
+                    <div>• Configuration: <span id="configStatus">Not configured</span></div>
+                    <div>• Recurring Bills: <span id="billsStatus">0 bills</span></div>
+                    <div>• Email Settings: <span id="emailStatus">Not configured</span></div>
+                    <div>• Tracker Data: <span id="trackerStatus">No file loaded</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal" id="aboutModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>About BillFlow</h2>
+                <button class="close-modal" onclick="closeModal('aboutModal')">Close ×</button>
+            </div>
+            <div style="text-align: center; padding: 20px 0;">
+                <div style="font-size: 3em; margin-bottom: 20px;">💰</div>
+                <h3 style="color: #4CAF50; margin-bottom: 15px;">BillFlow v1.0.0</h3>
+                <p style="color: #aaa; margin-bottom: 20px; line-height: 1.6;">
+                    A cross-platform personal bill management system designed to help you stay on top of your finances.
+                </p>
+                <div style="background: #252540; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
+                    <h4 style="color: #2196F3; margin-bottom: 15px;">✨ Features</h4>
+                    <div style="text-align: left; color: #ccc; font-size: 0.9em;">
+                        • 📊 Visual dashboard with charts and statistics<br>
+                        • 💰 Recurring bill management<br>
+                        • 📧 Email alerts and notifications<br>
+                        • 🗄️ Backup and restore functionality<br>
+                        • 🔄 Auto-refresh and real-time updates<br>
+                        • 📱 Cross-platform PowerShell integration
+                    </div>
+                </div>
+                <div style="background: #1a1a2e; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                    <h4 style="color: #4CAF50; margin-bottom: 10px;">🌍 Platform Support</h4>
+                    <div style="color: #aaa; font-size: 0.9em;">
+                        Windows • macOS • Linux<br>
+                        <span style="font-size: 0.8em;">Requires PowerShell 5.0+ or PowerShell Core 6.0+</span>
+                    </div>
+                </div>
+                <p style="color: #888; font-size: 0.9em;">
+                    Created with ❤️ for better financial management
+                </p>
+            </div>
+        </div>
+    </div>
+    
+	<!-- Add this modal HTML after the other modals in your dashboard -->
+	<div class="modal" id="analyticsModal">
+		<div class="modal-content" style="max-width: 900px; width: 95%;">
+			<div class="modal-header">
+				<h2>📊 Advanced Analytics</h2>
+				<button class="close-modal" onclick="closeModal('analyticsModal')">Close ×</button>
+			</div>
+			
+			<!-- Time Period Selector -->
+			<div style="margin-bottom: 20px; display: flex; gap: 10px; align-items: center;">
+				<label>Time Period:</label>
+				<select id="analyticsPeriod" onchange="updateAnalytics()">
+					<option value="3">Last 3 Months</option>
+					<option value="6" selected>Last 6 Months</option>
+					<option value="12">Last 12 Months</option>
+					<option value="all">All Time</option>
+				</select>
+				<button onclick="exportAnalyticsReport()" class="btn-secondary" style="margin-left: auto;">Export Report</button>
+			</div>
+			
+			<!-- Analytics Tabs -->
+			<div style="display: flex; gap: 5px; margin-bottom: 20px; border-bottom: 1px solid #333;">
+				<button class="analytics-tab active" onclick="showAnalyticsTab('overview')">Overview</button>
+				<button class="analytics-tab" onclick="showAnalyticsTab('trends')">Trends</button>
+				<button class="analytics-tab" onclick="showAnalyticsTab('categories')">Categories</button>
+				<button class="analytics-tab" onclick="showAnalyticsTab('performance')">Performance</button>
+				<button class="analytics-tab" onclick="showAnalyticsTab('predictions')">Predictions</button>
+			</div>
+			
+			<!-- Tab Content -->
+			<div id="analyticsContent">
+				<!-- Overview Tab -->
+				<div id="analytics-overview" class="analytics-tab-content">
+					<div class="stats-grid" style="margin-bottom: 30px;">
+						<div class="stat-card">
+							<div class="stat-label">Average Monthly Spend</div>
+							<div class="stat-value" id="avgMonthlySpend">$0</div>
+						</div>
+						<div class="stat-card">
+							<div class="stat-label">Total Paid</div>
+							<div class="stat-value" id="totalPaidAmount">$0</div>
+						</div>
+						<div class="stat-card">
+							<div class="stat-label">Payment Success Rate</div>
+							<div class="stat-value" id="paymentSuccessRate">0%</div>
+						</div>
+						<div class="stat-card">
+							<div class="stat-label">Most Expensive Category</div>
+							<div class="stat-value" id="topCategory">-</div>
+						</div>
+					</div>
+					
+					<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+						<div class="chart-container" style="padding: 20px;">
+							<h3 style="margin-bottom: 15px; color: #4CAF50;">Spending by Category</h3>
+							<canvas id="categoryPieChart"></canvas>
+						</div>
+						<div class="chart-container" style="padding: 20px;">
+							<h3 style="margin-bottom: 15px; color: #2196F3;">Payment Status Distribution</h3>
+							<canvas id="statusDonutChart"></canvas>
+						</div>
+					</div>
+				</div>
+				
+				<!-- Trends Tab -->
+				<div id="analytics-trends" class="analytics-tab-content" style="display: none;">
+					<div class="chart-container" style="padding: 20px; margin-bottom: 20px;">
+						<h3 style="margin-bottom: 15px; color: #4CAF50;">Monthly Spending Trend</h3>
+						<canvas id="trendLineChart"></canvas>
+					</div>
+					
+					<div class="chart-container" style="padding: 20px;">
+						<h3 style="margin-bottom: 15px; color: #2196F3;">Year-over-Year Comparison</h3>
+						<canvas id="yoyComparisonChart"></canvas>
+					</div>
+				</div>
+				
+				<!-- Categories Tab -->
+				<div id="analytics-categories" class="analytics-tab-content" style="display: none;">
+					<div class="chart-container" style="padding: 20px; margin-bottom: 20px;">
+						<h3 style="margin-bottom: 15px; color: #4CAF50;">Category Spending Over Time</h3>
+						<canvas id="categoryTrendChart"></canvas>
+					</div>
+					
+					<div id="categoryDetailsGrid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px;">
+						<!-- Category detail cards will be inserted here -->
+					</div>
+				</div>
+				
+				<!-- Performance Tab -->
+				<div id="analytics-performance" class="analytics-tab-content" style="display: none;">
+					<div class="stats-grid" style="margin-bottom: 30px;">
+						<div class="stat-card">
+							<div class="stat-label">On-Time Payments</div>
+							<div class="stat-value" style="color: #4CAF50;" id="onTimePayments">0</div>
+						</div>
+						<div class="stat-card">
+							<div class="stat-label">Late Payments</div>
+							<div class="stat-value" style="color: #ff9800;" id="latePayments">0</div>
+						</div>
+						<div class="stat-card">
+							<div class="stat-label">Overdue Bills</div>
+							<div class="stat-value" style="color: #f44336;" id="overdueBills">0</div>
+						</div>
+						<div class="stat-card">
+							<div class="stat-label">Auto-Pay Success</div>
+							<div class="stat-value" id="autoPaySuccess">0%</div>
+						</div>
+					</div>
+					
+					<div class="chart-container" style="padding: 20px;">
+						<h3 style="margin-bottom: 15px; color: #2196F3;">Payment Performance Timeline</h3>
+						<canvas id="performanceChart"></canvas>
+					</div>
+					
+					<div id="billPerformanceList" style="margin-top: 20px;">
+						<!-- Individual bill performance will be listed here -->
+					</div>
+				</div>
+				
+				<!-- Predictions Tab -->
+				<div id="analytics-predictions" class="analytics-tab-content" style="display: none;">
+					<div class="management-card">
+						<h3 style="color: #4CAF50; margin-bottom: 20px;">📈 Next Month Forecast</h3>
+						<div id="nextMonthForecast">
+							<!-- Forecast details will be inserted here -->
+						</div>
+					</div>
+					
+					<div class="management-card" style="margin-top: 20px;">
+						<h3 style="color: #2196F3; margin-bottom: 20px;">💡 Insights & Recommendations</h3>
+						<div id="analyticsInsights">
+							<!-- Insights will be inserted here -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Add these styles to your existing style section -->
+	<style>
+	.analytics-tab {
+		background: transparent;
+		border: none;
+		padding: 10px 20px;
+		color: #888;
+		cursor: pointer;
+		transition: all 0.3s;
+		border-bottom: 2px solid transparent;
+	}
+
+	.analytics-tab:hover {
+		color: #e0e0e0;
+	}
+
+	.analytics-tab.active {
+		color: #4CAF50;
+		border-bottom-color: #4CAF50;
+	}
+
+	.analytics-tab-content {
+		animation: fadeIn 0.3s ease-out;
+	}
+
+	@keyframes fadeIn {
+		from { opacity: 0; transform: translateY(10px); }
+		to { opacity: 1; transform: translateY(0); }
+	}
+
+	.category-detail-card {
+		background: #252540;
+		border: 1px solid #333;
+		border-radius: 8px;
+		padding: 20px;
+		text-align: center;
+	}
+
+	.category-detail-card h4 {
+		color: #4CAF50;
+		margin-bottom: 10px;
+	}
+
+	.performance-item {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		padding: 10px 15px;
+		background: #252540;
+		border-radius: 6px;
+		margin-bottom: 10px;
+	}
+
+	.insight-item {
+		padding: 15px;
+		background: #252540;
+		border-left: 3px solid #4CAF50;
+		border-radius: 6px;
+		margin-bottom: 10px;
+	}
+
+	.forecast-item {
+		display: flex;
+		justify-content: space-between;
+		padding: 10px 0;
+		border-bottom: 1px solid #333;
+	}
+
+	.forecast-item:last-child {
+		border-bottom: none;
+	}
+	</style>
+	
+    <div class="modal" id="helpModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>BillFlow User Guide</h2>
+                <button class="close-modal" onclick="closeModal('helpModal')">Close ×</button>
+            </div>
+            <div style="font-size: 0.9em;">
+                <h3 style="color: #4CAF50; margin: 20px 0 10px 0;">Bill Status Codes</h3>
+                <ul style="padding-left: 20px; color: #aaa;">
+                    <li><strong>*</strong> - Unpaid bill (manual payment required)</li>
+                    <li><strong>Y</strong> - Due within 7 days</li>
+                    <li><strong>R</strong> - Overdue</li>
+                    <li><strong>=</strong> - Auto-payment scheduled</li>
+                    <li><strong>x</strong> - Paid/Completed</li>
+                </ul>
+                
+                <h3 style="color: #4CAF50; margin: 20px 0 10px 0;">File Format</h3>
+                <div class="code-block">
+* 2025-08-12 Bill Name [Category] ;; amount<br>
+x 2025-07-01 2025-07-15 Bill Name [Category] ;; amount
+                </div>
+                
+                <h3 style="color: #4CAF50; margin: 20px 0 10px 0;">Daily Workflow</h3>
+                <ol style="padding-left: 20px; color: #aaa;">
+                    <li>Run BillFlow.ps1 script to update bill statuses</li>
+                    <li>Check dashboard for bills due soon</li>
+                    <li>Mark bills as paid by changing * to x and adding payment date</li>
+                    <li>Auto-payments (=) are marked complete automatically on due date</li>
+                </ol>
+                
+                <h3 style="color: #4CAF50; margin: 20px 0 10px 0;">PowerShell Setup</h3>
+                <div class="code-block">
+# Windows (PowerShell 5.0+ included)<br>
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser<br><br>
+# macOS - Install PowerShell Core<br>
+brew install --cask powershell<br><br>
+# Linux (Ubuntu/Debian)<br>
+sudo apt update && sudo apt install -y powershell<br><br>
+# Linux (CentOS/RHEL)<br>
+sudo yum install -y powershell<br><br>
+# Run BillFlow<br>
+pwsh ./BillFlow.ps1
+                </div>
+                <p style="color: #888; font-size: 0.9em; margin-top: 10px;">
+                    📖 <strong>Need help installing PowerShell?</strong><br>
+                    Visit: <a href="https://docs.microsoft.com/en-us/powershell/scripting/install/installing-powershell" target="_blank" style="color: #4CAF50;">Microsoft PowerShell Installation Guide</a>
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <script>
+        // Store configuration in localStorage
+        let config = {
+            billsPath: localStorage.getItem('billflow_billsPath') || '',
+            trackerPath: localStorage.getItem('billflow_trackerPath') || '',
+            backupPath: localStorage.getItem('billflow_backupPath') || '',
+            daysWarning: localStorage.getItem('billflow_daysWarning') || '7',
+            emailEnabled: localStorage.getItem('billflow_emailEnabled') === 'true',
+            emailAddress: localStorage.getItem('billflow_emailAddress') || '',
+            smtpServer: localStorage.getItem('billflow_smtpServer') || '',
+            smtpPort: localStorage.getItem('billflow_smtpPort') || '587',
+            emailUsername: localStorage.getItem('billflow_emailUsername') || '',
+            emailPassword: localStorage.getItem('billflow_emailPassword') || '',
+            dailySummary: localStorage.getItem('billflow_dailySummary') === 'true',
+            dueSoonAlerts: localStorage.getItem('billflow_dueSoonAlerts') !== 'false',
+            overdueWarnings: localStorage.getItem('billflow_overdueWarnings') !== 'false',
+            summaryTime: localStorage.getItem('billflow_summaryTime') || '08:00',
+            alertDaysAhead: localStorage.getItem('billflow_alertDaysAhead') || '3',
+            recurringBills: JSON.parse(localStorage.getItem('billflow_recurringBills') || '[]')
+        };
+        
+        // Global variables
+        let allBills = [];
+        let chart = null;
+        let categories = new Set();
+        let currentFile = null;
+        let autoRefreshInterval = null;
+        let fileLastModified = null;
+        
+        // Debug function
+        function debugLog(message, data = null) {
+            console.log('[BillFlow Debug]', message, data || '');
+        }
+        
+        // Sidebar functions
+        function toggleSidebar() {
+            debugLog('Toggle sidebar clicked');
+            document.getElementById('sidebar').classList.toggle('collapsed');
+        }
+        
+        function showModal(modalId) {
+            debugLog('Showing modal:', modalId);
+            document.getElementById(modalId).classList.add('active');
+        }
+        
+        function closeModal(modalId) {
+            debugLog('Closing modal:', modalId);
+            document.getElementById(modalId).classList.remove('active');
+        }
+        
+        // Configuration functions
+        function showConfigModal() {
+            debugLog('Showing config modal');
+            document.getElementById('configBillsPath').value = config.billsPath;
+            document.getElementById('configTrackerPath').value = config.trackerPath;
+            document.getElementById('configBackupPath').value = config.backupPath;
+            document.getElementById('configDaysWarning').value = config.daysWarning;
+            showModal('configModal');
+        }
+        
+        function saveConfig(event) {
+            event.preventDefault();
+            debugLog('Saving configuration');
+            
+            config.billsPath = document.getElementById('configBillsPath').value;
+            config.trackerPath = document.getElementById('configTrackerPath').value;
+            config.backupPath = document.getElementById('configBackupPath').value;
+            config.daysWarning = document.getElementById('configDaysWarning').value;
+            
+            localStorage.setItem('billflow_billsPath', config.billsPath);
+            localStorage.setItem('billflow_trackerPath', config.trackerPath);
+            localStorage.setItem('billflow_backupPath', config.backupPath);
+            localStorage.setItem('billflow_daysWarning', config.daysWarning);
+            
+            closeModal('configModal');
+            alert('Configuration saved successfully!');
+        }
+        
+        // Email configuration functions
+        function showEmailModal() {
+            debugLog('Showing email modal');
+            // Load current configuration
+            document.getElementById('emailAddress').value = config.emailAddress;
+            document.getElementById('smtpServer').value = config.smtpServer;
+            document.getElementById('smtpPort').value = config.smtpPort;
+            document.getElementById('emailUsername').value = config.emailUsername;
+            document.getElementById('emailPassword').value = config.emailPassword;
+            document.getElementById('summaryTime').value = config.summaryTime;
+            document.getElementById('alertDaysAhead').value = config.alertDaysAhead;
+            
+            // Set toggle states
+            setToggleState('emailEnabledToggle', config.emailEnabled);
+            setToggleState('dailySummaryToggle', config.dailySummary);
+            setToggleState('dueSoonAlertsToggle', config.dueSoonAlerts);
+            setToggleState('overdueWarningsToggle', config.overdueWarnings);
+            
+            // Show/hide config fields based on enabled state
+            toggleEmailConfigFields();
+            
+            showModal('emailModal');
+        }
+        
+        function setToggleState(toggleId, isActive) {
+            const toggle = document.getElementById(toggleId);
+            if (isActive) {
+                toggle.classList.add('active');
+            } else {
+                toggle.classList.remove('active');
+            }
+        }
+        
+        function toggleEmailEnabled() {
+            const toggle = document.getElementById('emailEnabledToggle');
+            toggle.classList.toggle('active');
+            toggleEmailConfigFields();
+        }
+        
+        function toggleEmailConfigFields() {
+            const toggle = document.getElementById('emailEnabledToggle');
+            const fields = document.getElementById('emailConfigFields');
+            
+            if (toggle.classList.contains('active')) {
+                fields.style.display = 'block';
+            } else {
+                fields.style.display = 'none';
+            }
+        }
+        
+        function toggleDailySummary() {
+            document.getElementById('dailySummaryToggle').classList.toggle('active');
+        }
+        
+        function toggleDueSoonAlerts() {
+            document.getElementById('dueSoonAlertsToggle').classList.toggle('active');
+        }
+        
+        function toggleOverdueWarnings() {
+            document.getElementById('overdueWarningsToggle').classList.toggle('active');
+        }
+        
+        function saveEmailConfig(event) {
+            event.preventDefault();
+            debugLog('Saving email configuration');
+            
+            // Save all email configuration
+            config.emailEnabled = document.getElementById('emailEnabledToggle').classList.contains('active');
+            config.emailAddress = document.getElementById('emailAddress').value;
+            config.smtpServer = document.getElementById('smtpServer').value;
+            config.smtpPort = document.getElementById('smtpPort').value;
+            config.emailUsername = document.getElementById('emailUsername').value;
+            config.emailPassword = document.getElementById('emailPassword').value;
+            config.dailySummary = document.getElementById('dailySummaryToggle').classList.contains('active');
+            config.dueSoonAlerts = document.getElementById('dueSoonAlertsToggle').classList.contains('active');
+            config.overdueWarnings = document.getElementById('overdueWarningsToggle').classList.contains('active');
+            config.summaryTime = document.getElementById('summaryTime').value;
+            config.alertDaysAhead = document.getElementById('alertDaysAhead').value;
+            
+            // Save to localStorage
+            localStorage.setItem('billflow_emailEnabled', config.emailEnabled);
+            localStorage.setItem('billflow_emailAddress', config.emailAddress);
+            localStorage.setItem('billflow_smtpServer', config.smtpServer);
+            localStorage.setItem('billflow_smtpPort', config.smtpPort);
+            localStorage.setItem('billflow_emailUsername', config.emailUsername);
+            localStorage.setItem('billflow_emailPassword', config.emailPassword);
+            localStorage.setItem('billflow_dailySummary', config.dailySummary);
+            localStorage.setItem('billflow_dueSoonAlerts', config.dueSoonAlerts);
+            localStorage.setItem('billflow_overdueWarnings', config.overdueWarnings);
+            localStorage.setItem('billflow_summaryTime', config.summaryTime);
+            localStorage.setItem('billflow_alertDaysAhead', config.alertDaysAhead);
+            
+            closeModal('emailModal');
+            
+            if (config.emailEnabled) {
+                alert('Email alerts configured successfully! Your PowerShell script can now send email notifications.');
+            } else {
+                alert('Email alerts disabled.');
+            }
+        }
+        
+        function testEmailConfig() {
+            debugLog('Testing email configuration');
+            if (!document.getElementById('emailEnabledToggle').classList.contains('active')) {
+                alert('Please enable email alerts first.');
+                return;
+            }
+            
+            const emailAddress = document.getElementById('emailAddress').value;
+            const smtpServer = document.getElementById('smtpServer').value;
+            const username = document.getElementById('emailUsername').value;
+            const password = document.getElementById('emailPassword').value;
+            
+            if (!emailAddress || !smtpServer || !username || !password) {
+                alert('Please fill in all required email fields (Email, SMTP Server, Username, Password).');
+                return;
+            }
+            
+            // Create a simple test by downloading PowerShell command
+            const testConfig = {
+                billsPath: config.billsPath || "./BillFlow_Bills.csv",
+                trackerPath: config.trackerPath || "./BillFlow.txt",
+                backupPath: config.backupPath || "./BillFlow_Backups",
+                daysWarning: config.daysWarning || "7",
+                emailConfig: {
+                    enabled: true,
+                    emailAddress: emailAddress,
+                    smtpServer: smtpServer,
+                    smtpPort: parseInt(document.getElementById('smtpPort').value),
+                    username: username,
+                    password: password,
+                    dailySummary: document.getElementById('dailySummaryToggle').classList.contains('active'),
+                    dueSoonAlerts: document.getElementById('dueSoonAlertsToggle').classList.contains('active'),
+                    overdueWarnings: document.getElementById('overdueWarningsToggle').classList.contains('active'),
+                    summaryTime: document.getElementById('summaryTime').value,
+                    alertDaysAhead: parseInt(document.getElementById('alertDaysAhead').value)
+                }
+            };
+            
+            // Download test config
+            const configBlob = new Blob([JSON.stringify(testConfig, null, 2)], { type: 'application/json' });
+            const configUrl = URL.createObjectURL(configBlob);
+            const configLink = document.createElement('a');
+            configLink.href = configUrl;
+            configLink.download = 'BillFlow_EmailTest_Config.json';
+            configLink.click();
+            
+            alert('✅ Test configuration downloaded!\n\n🚀 Run this PowerShell command to test:\n./BillFlow.ps1 -ConfigFile "./BillFlow_EmailTest_Config.json" -TestEmail -Verbose\n\nThis will send a real test email using your SMTP settings.');
+        }
+        
+        // Bill management functions
+        function showAddBillModal() {
+            debugLog('Showing bills management section for adding bill');
+            showBillsManagement();
+            // Focus on the name field to make it clear this is for adding
+            setTimeout(() => {
+                document.getElementById('newBillName').focus();
+            }, 300);
+        }
+        
+        function addBill(event) {
+            event.preventDefault();
+            debugLog('Adding new bill');
+            
+            const bill = {
+                name: document.getElementById('billName').value,
+                category: document.getElementById('billCategory').value,
+                recurrence: document.getElementById('billRecurrence').value,
+                day: document.getElementById('billDay').value,
+                action: document.getElementById('billAction').value,
+                amount: document.getElementById('billAmount').value || '0'
+            };
+            
+            config.recurringBills.push(bill);
+            localStorage.setItem('billflow_recurringBills', JSON.stringify(config.recurringBills));
+            
+            closeModal('addBillModal');
+            alert('Bill added successfully! You can export the CSV to use with BillFlow.ps1');
+            
+            // Clear form
+            event.target.reset();
+        }
+        
+        function importBillsCSV(event) {
+            debugLog('Importing bills CSV');
+            const file = event.target.files[0];
+            if (!file) return;
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const csvContent = e.target.result;
+                    const lines = csvContent.split('\n');
+                    
+                    // Skip header row and empty lines
+                    const dataLines = lines.slice(1).filter(line => line.trim());
+                    
+                    const importedBills = [];
+                    
+                    dataLines.forEach((line, index) => {
+                        // Simple CSV parsing - handle quoted fields
+                        const fields = [];
+                        let current = '';
+                        let inQuotes = false;
+                        
+                        for (let i = 0; i < line.length; i++) {
+                            const char = line[i];
+                            if (char === '"') {
+                                inQuotes = !inQuotes;
+                            } else if (char === ',' && !inQuotes) {
+                                fields.push(current.trim());
+                                current = '';
+                            } else {
+                                current += char;
+                            }
+                        }
+                        fields.push(current.trim()); // Add last field
+                        
+                        // Expected format: Action,Recurrance,Day,Name,Category,EstAmount
+                        if (fields.length >= 4) {
+                            const bill = {
+                                action: fields[0] || '*',
+                                recurrence: fields[1] || 'M',
+                                day: fields[2] || '1',
+                                name: fields[3].replace(/"/g, ''), // Remove quotes
+                                category: fields[4] || 'Other',
+                                amount: fields[5] || '0'
+                            };
+                            
+                            // Validate required fields
+                            if (bill.name && bill.name.trim()) {
+                                importedBills.push(bill);
+                            }
+                        }
+                    });
+                    
+                    if (importedBills.length > 0) {
+                        // Ask user if they want to replace or merge
+                        const choice = confirm(
+                            `Found ${importedBills.length} bills in CSV file.\n\n` +
+                            `Click OK to REPLACE existing bills, or Cancel to MERGE with existing bills.`
+                        );
+                        
+                        if (choice) {
+                            // Replace existing bills
+                            config.recurringBills = importedBills;
+                        } else {
+                            // Merge with existing bills (avoid duplicates by name)
+                            const existingNames = config.recurringBills.map(b => b.name.toLowerCase());
+                            const newBills = importedBills.filter(b => 
+                                !existingNames.includes(b.name.toLowerCase())
+                            );
+                            config.recurringBills = [...config.recurringBills, ...newBills];
+                        }
+                        
+                        localStorage.setItem('billflow_recurringBills', JSON.stringify(config.recurringBills));
+                        refreshBillsList();
+                        
+                        // Show success message
+                        const successMsg = document.createElement('div');
+                        successMsg.style.cssText = 'position: fixed; top: 20px; right: 20px; background: #4CAF50; color: white; padding: 15px 20px; border-radius: 6px; z-index: 1001;';
+                        successMsg.textContent = `✅ Imported ${importedBills.length} bills successfully!`;
+                        document.body.appendChild(successMsg);
+                        
+                        setTimeout(() => {
+                            successMsg.remove();
+                        }, 4000);
+                        
+                        debugLog('CSV import successful', { imported: importedBills.length, total: config.recurringBills.length });
+                    } else {
+                        alert('No valid bills found in CSV file. Please check the format:\nAction,Recurrance,Day,Name,Category,EstAmount');
+                    }
+                } catch (error) {
+                    debugLog('Error importing CSV:', error);
+                    alert('Error importing CSV file: ' + error.message + '\n\nPlease ensure the file format is correct.');
+                }
+            };
+            
+            reader.readAsText(file);
+            
+            // Clear the input so the same file can be selected again
+            event.target.value = '';
+        }
+        
+        function exportBillsCSV() {
+            debugLog('Exporting bills CSV');
+            if (config.recurringBills.length === 0) {
+                alert('No bills to export. Add some recurring bills first.');
+                return;
+            }
+            
+            let csv = 'Action,Recurrance,Day,Name,Category,EstAmount\n';
+            config.recurringBills.forEach(bill => {
+                csv += `${bill.action},${bill.recurrence},${bill.day},"${bill.name}",${bill.category},${bill.amount}\n`;
+            });
+            
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'BillFlow_Bills.csv';
+            a.click();
+            
+            // Show export reminder
+            const exportMsg = document.createElement('div');
+            exportMsg.style.cssText = 'position: fixed; top: 20px; right: 20px; background: #2196F3; color: white; padding: 15px 20px; border-radius: 6px; z-index: 1001;';
+            exportMsg.textContent = `📤 CSV exported! Save as "BillFlow_Bills.csv" in your PowerShell script folder.`;
+            document.body.appendChild(exportMsg);
+            
+            setTimeout(() => {
+                exportMsg.remove();
+            }, 5000);
+        }
+        
+        function exportConfig() {
+            debugLog('Exporting configuration');
+            const configData = {
+                billsPath: config.billsPath,
+                trackerPath: config.trackerPath,
+                backupPath: config.backupPath,
+                daysWarning: config.daysWarning,
+                emailConfig: {
+                    enabled: config.emailEnabled,
+                    emailAddress: config.emailAddress,
+                    smtpServer: config.smtpServer,
+                    smtpPort: config.smtpPort,
+                    username: config.emailUsername,
+                    // Don't export password for security
+                    dailySummary: config.dailySummary,
+                    dueSoonAlerts: config.dueSoonAlerts,
+                    overdueWarnings: config.overdueWarnings,
+                    summaryTime: config.summaryTime,
+                    alertDaysAhead: config.alertDaysAhead
+                },
+                recurringBills: config.recurringBills
+            };
+            
+            const blob = new Blob([JSON.stringify(configData, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'BillFlow_Config.json';
+            a.click();
+        }
+				
+		// Add this function to your dashboard JavaScript
+		function generateRealisticSampleData() {
+			debugLog('Generating realistic sample data based on actual bill patterns');
+			
+			// Mapping of real names to fake names and amount ranges
+			const billMappings = {
+				'Allstate (automobile)': { 
+					name: 'SafeGuard Auto Insurance', 
+					category: 'Insurance', 
+					minAmount: 85, 
+					maxAmount: 125 
+				},
+				'Amazon Prime Chase': { 
+					name: 'MegaStore Credit Card', 
+					category: 'Credit Card', 
+					minAmount: 1500, 
+					maxAmount: 4500 
+				},
+				'Atmos Energy (@ebill)': { 
+					name: 'GreenGas Utilities', 
+					category: 'Utilities', 
+					minAmount: 25, 
+					maxAmount: 120 
+				},
+				'AT&T (@auto on Chase AMZ PRM)': { 
+					name: 'TeleConnect Plus', 
+					category: 'Utilities', 
+					minAmount: 150, 
+					maxAmount: 250 
+				},
+				'Transfer to Gifts Savings': { 
+					name: 'Holiday Fund Transfer', 
+					category: 'Savings', 
+					minAmount: 100, 
+					maxAmount: 150 
+				},
+				'Lane Sanitation (@auto sched in BBT)': { 
+					name: 'EcoWaste Services', 
+					category: 'Utilities', 
+					minAmount: 20, 
+					maxAmount: 35 
+				},
+				'Vehicle Tax/Registration': { 
+					name: 'Vehicle Registration Fee', 
+					category: 'Tax', 
+					minAmount: 150, 
+					maxAmount: 200 
+				},
+				'Transfer to Escrow': { 
+					name: 'Property Fund Transfer', 
+					category: 'Mortgage', 
+					minAmount: 200, 
+					maxAmount: 250 
+				},
+				'Freedom Chase': { 
+					name: 'Rewards Plus Card', 
+					category: 'Credit Card', 
+					minAmount: 100, 
+					maxAmount: 300 
+				},
+				'Slate Chase': { 
+					name: 'CashBack Elite Card', 
+					category: 'Credit Card', 
+					minAmount: 20, 
+					maxAmount: 150 
+				},
+				'Roth IRA': { 
+					name: 'Retirement Investment', 
+					category: 'Investment', 
+					minAmount: 500, 
+					maxAmount: 750 
+				},
+				'Kenergy': { 
+					name: 'PowerGrid Electric', 
+					category: 'Utilities', 
+					minAmount: 200, 
+					maxAmount: 500 
+				},
+				'Daviess County Water': { 
+					name: 'City Water & Sewer', 
+					category: 'Utilities', 
+					minAmount: 60, 
+					maxAmount: 85 
+				},
+				'Allstate HOME': { 
+					name: 'HomeShield Insurance', 
+					category: 'Insurance', 
+					minAmount: 1000, 
+					maxAmount: 1300 
+				},
+				'Property Taxes/Daviess Co Sheriff': { 
+					name: 'Annual Property Tax', 
+					category: 'Tax', 
+					minAmount: 1400, 
+					maxAmount: 1600 
+				},
+				'Deposit to Schwab Brokerage': { 
+					name: 'Investment Portfolio Deposit', 
+					category: 'Investment', 
+					minAmount: 200, 
+					maxAmount: 300 
+				}
+			};
+			
+			// Function to generate random amount within range
+			function randomAmount(min, max) {
+				return (Math.random() * (max - min) + min).toFixed(2);
+			}
+			
+			// Function to transform a bill line
+			function transformBillLine(line) {
+				// Skip empty lines and comments
+				if (!line.trim() || line.startsWith('#')) {
+					return line;
+				}
+				
+				// Check if it's a bill line
+				if (line.match(/^[*YR=x]/i)) {
+					// Try to find the bill name in our mappings
+					for (const [realName, mapping] of Object.entries(billMappings)) {
+						if (line.includes(realName)) {
+							// Replace the name
+							let newLine = line.replace(realName, mapping.name);
+							
+							// Replace the category if it exists
+							newLine = newLine.replace(/\[([^\]]+)\]/, `[${mapping.category}]`);
+							
+							// Replace the amount if it exists
+							const amountMatch = newLine.match(/;;\s*([\d,]+\.?\d*)/);
+							if (amountMatch) {
+								const newAmount = randomAmount(mapping.minAmount, mapping.maxAmount);
+								newLine = newLine.replace(/;;\s*[\d,]+\.?\d*/, `;; ${newAmount}`);
+							}
+							
+							return newLine;
+						}
+					}
+				}
+				
+				return line;
+			}
+			
+			// Get your actual data and transform it
+			const actualData = `* 2025-08-12 Amazon Prime Chase [Credit Card]
+* 2025-08-10 Atmos Energy (@ebill) [Utilities]
+= 2025-08-07 AT&T (@auto on Chase AMZ PRM) [Credit Card] ;; 211.73
+= 2025-08-04 Transfer to Gifts Savings [Savings] ;; 125.00
+= 2025-08-02 Lane Sanitation (@auto sched in BBT) [Utilities] ;; 20.00
+* 2025-08-01 Vehicle Tax/Registration [Tax] ;; 168.00
+= 2025-08-01 Transfer to Escrow [Mortgage] ;; 208.00
+#---- PAID ----- DUE -------
+x 2025-07-12 2025-07-30 Allstate (automobile) [Insurance] ;; 81.94
+x 2025-07-04 2025-07-27 Freedom Chase [Credit Card] ;; 147.64
+= 2025-07-23 Roth IRA [Investment] ;; 666.67
+x 2025-07-12 2025-07-22 Kenergy [Utilities] ;; 491.59
+x 2025-07-04 2025-07-15 Daviess County Water [Utilities] ;; 71.22
+x 2025-06-28 2025-07-12 Amazon Prime Chase [Credit Card] ;; 2637.24
+x 2025-06-28 2025-07-14 Atmos Energy (@ebill) [Utilities] ;; 7.08
+x 2025-06-10 2025-07-10 Atmos Energy (@ebill) [Utilities] ;; 30.96
+x 2025-07-07 2025-07-07 AT&T (@auto on Chase AMZ PRM) [Credit Card] ;; 211.73
+x 2025-07-04 2025-07-04 Transfer to Gifts Savings [Savings] ;; 125.00
+x 2025-07-02 2025-07-02 Lane Sanitation (@auto sched in BBT) [Utilities] ;; 20.00
+x 2025-07-01 2025-07-01 Transfer to Escrow [Mortgage] ;; 208.00
+#---- PAID ----- DUE -------
+x 2025-06-20 2025-06-30 Allstate (automobile) [Insurance] ;; 81.94
+x 2025-06-03 2025-06-27 Slate Chase [Credit Card] ;; 22.47
+x 2025-06-23 2025-06-23 Roth IRA [Investment] ;; 666.67
+x 2025-06-10 2025-06-22 Kenergy [Utilities] ;; 355.39
+x 2025-06-03 2025-06-15 Daviess County Water [Utilities] ;; 68.96
+x 2025-05-23 2025-06-12 Amazon Prime Chase [Credit Card] ;; 5161.62
+x 2025-06-03 2025-06-10 Atmos Energy (@ebill) [Utilities] ;; 30.96
+x 2025-06-07 2025-06-07 AT&T (@auto on Chase AMZ PRM) [Credit Card] ;; 211.73
+x 2025-06-04 2025-06-04 Transfer to Gifts Savings [Savings] ;; 125.00
+x 2025-06-02 2025-06-02 Lane Sanitation (@auto sched in BBT) [Utilities] ;; 20.00
+x 2025-06-01 2025-06-01 Transfer to Escrow [Mortgage] ;; 208.00
+#---- PAID ----- DUE -------
+x 2025-05-21 2025-05-30 Allstate (automobile) [Insurance] ;; 81.96
+x 2025-05-04 2025-05-27 Slate Chase [Credit Card] ;; 22.47
+x 2025-05-23 2025-05-23 Roth IRA [Investment] ;; 666.67
+x 2025-05-11 2025-05-22 Kenergy [Utilities] ;; 311.44
+x 2025-05-04 2025-05-15 Daviess County Water [Utilities] ;; 80.22
+x 2025-04-25 2025-05-12 Amazon Prime Chase [Credit Card] ;; 2980.92
+x 2025-04-25 2025-05-10 Atmos Energy (@ebill) [Utilities] ;; 36.21
+x 2025-05-07 2025-05-07 AT&T (@auto on Chase AMZ PRM) [Credit Card] ;; 211.73
+x 2025-05-04 2025-05-04 Transfer to Gifts Savings [Savings] ;; 125.00
+x 2025-05-02 2025-05-02 Lane Sanitation (@auto sched in BBT) [Utilities] ;; 20.00
+x 2025-05-01 2025-05-01 Transfer to Escrow [Mortgage] ;; 208.00`;
+			
+			// Transform the data
+			const lines = actualData.split('\n');
+			const transformedLines = lines.map(line => transformBillLine(line));
+			const sampleData = transformedLines.join('\n');
+			
+			// Add some additional fictional bills to make it more diverse
+			const additionalBills = `
+#---- PAID ----- DUE -------
+x 2025-04-10 2025-04-30 SafeGuard Auto Insurance [Insurance] ;; 95.50
+x 2025-04-09 2025-04-27 CashBack Elite Card [Credit Card] ;; 45.80
+x 2025-04-23 2025-04-23 Retirement Investment [Investment] ;; 625.00
+x 2025-04-09 2025-04-22 PowerGrid Electric [Utilities] ;; 275.40
+x 2025-04-03 2025-04-15 City Water & Sewer [Utilities] ;; 72.15
+x 2025-03-28 2025-04-12 MegaStore Credit Card [Credit Card] ;; 2245.60
+x 2025-03-25 2025-04-10 GreenGas Utilities [Utilities] ;; 58.30
+x 2025-04-07 2025-04-07 TeleConnect Plus [Utilities] ;; 189.99
+x 2025-04-04 2025-04-04 Holiday Fund Transfer [Savings] ;; 125.00
+x 2025-04-02 2025-04-02 EcoWaste Services [Utilities] ;; 25.00
+x 2025-04-01 2025-04-01 Property Fund Transfer [Mortgage] ;; 225.00
+* 2025-04-15 StreamFlix Subscription [Subscription] ;; 15.99
+= 2025-04-20 CloudSync Pro [Subscription] ;; 9.99
+x 2025-03-15 2025-04-01 FitLife Gym [Health] ;; 45.00`;
+			
+			const fullSampleData = sampleData + additionalBills;
+			
+			// Parse and load the sample data
+			const { bills, monthlyData, categoryData } = parseTrackerFile(fullSampleData);
+			allBills = bills;
+			updateStats();
+			updateChart(categoryData);
+			updateCategoryFilter();
+			filterBills();
+			updateLastUpdateTime();
+			
+			// Also update recurring bills with sample data
+			const sampleRecurringBills = [
+				{ action: '*', recurrence: 'M', day: '15', name: 'PowerGrid Electric', category: 'Utilities', amount: '280.00' },
+				{ action: '*', recurrence: 'M', day: '1', name: 'Homestead Mortgage', category: 'Mortgage', amount: '1500.00' },
+				{ action: '=', recurrence: 'M', day: '5', name: 'StreamFlix Subscription', category: 'Subscription', amount: '15.99' },
+				{ action: '*', recurrence: 'A', day: '2025-12-31', name: 'Property Tax Annual', category: 'Tax', amount: '2000.00' },
+				{ action: '=', recurrence: 'M', day: '10', name: 'SafeGuard Auto Insurance', category: 'Insurance', amount: '95.00' },
+				{ action: '*', recurrence: 'M', day: '25', name: 'City Water & Sewer', category: 'Utilities', amount: '75.00' },
+				{ action: '=', recurrence: 'M', day: '23', name: 'Retirement Investment', category: 'Investment', amount: '625.00' },
+				{ action: '*', recurrence: 'M', day: '12', name: 'MegaStore Credit Card', category: 'Credit Card', amount: '2500.00' },
+				{ action: '=', recurrence: 'M', day: '7', name: 'TeleConnect Plus', category: 'Utilities', amount: '189.99' },
+				{ action: '=', recurrence: 'M', day: '2', name: 'EcoWaste Services', category: 'Utilities', amount: '25.00' },
+				{ action: '*', recurrence: 'M', day: '20', name: 'GreenGas Utilities', category: 'Utilities', amount: '65.00' },
+				{ action: '=', recurrence: 'M', day: '15', name: 'CloudSync Pro', category: 'Subscription', amount: '9.99' },
+				{ action: '*', recurrence: 'M', day: '27', name: 'CashBack Elite Card', category: 'Credit Card', amount: '125.00' },
+				{ action: '=', recurrence: 'M', day: '1', name: 'FitLife Gym', category: 'Health', amount: '45.00' }
+			];
+			
+			config.recurringBills = sampleRecurringBills;
+			localStorage.setItem('billflow_recurringBills', JSON.stringify(config.recurringBills));
+			
+			// Create a virtual file object for refresh functionality
+			const sampleBlob = new Blob([fullSampleData], { type: 'text/plain' });
+			currentFile = new File([sampleBlob], 'Sample_BillFlow.txt', {
+				type: 'text/plain',
+				lastModified: Date.now()
+			});
+			fileLastModified = currentFile.lastModified;
+			
+			alert(`✅ Realistic sample data loaded!\n\n📊 Generated from your bill patterns with:\n• Fictional company names\n• Randomized amounts\n• Preserved payment patterns\n• Added diverse categories\n\n📸 Perfect for screenshots and demos!`);
+			
+			debugLog('Sample data loaded', { 
+				billCount: bills.length,
+				recurringCount: sampleRecurringBills.length,
+				categories: Array.from(categories).length
+			});
+		}
+
+		// Update your existing generateSampleData function to call this new one
+		function generateSampleData() {
+			generateRealisticSampleData();
+		}
+        
+        function loadSampleData() {
+            debugLog('Loading sample tracker data');
+            const sampleData = `* 2025-08-12 ShopMart Premium Card [Credit Card] ;; 1250.00
+* 2025-08-10 City Gas Company (@ebill) [Utilities] ;; 75.00
+= 2025-08-07 TeleConnect (@auto on Premium Card) [Utilities] ;; 95.50
+= 2025-08-04 Transfer to Holiday Fund [Savings] ;; 150.00
+= 2025-08-02 Green Waste Services (@auto sched in BBT) [Utilities] ;; 35.00
+* 2025-08-01 Vehicle Registration Fee [Tax] ;; 125.00
+= 2025-08-01 Transfer to Property Fund [Mortgage] ;; 275.00
+Y 2025-07-22 PowerGrid Electric [Utilities] ;; 180.00
+x 2025-07-12 2025-07-30 SafeDriver Insurance [Insurance] ;; 92.50
+x 2025-07-04 2025-07-27 Rewards Plus Card [Credit Card] ;; 320.75
+x 2025-07-12 2025-07-22 PowerGrid Electric [Utilities] ;; 165.25
+x 2025-07-12 ShopMart Premium Card [Credit Card] ;; 890.40
+x 2025-07-07 TeleConnect (@auto on Premium Card) [Utilities] ;; 95.50`;
+
+            // Parse and load the sample data
+            const { bills, monthlyData, categoryData } = parseTrackerFile(sampleData);
+            allBills = bills;
+            updateStats();
+            updateChart(categoryData);
+            updateCategoryFilter();
+            filterBills();
+            updateLastUpdateTime();
+            
+            debugLog('Sample data loaded', { billCount: bills.length });
+        }
+        
+        // Placeholder functions for unimplemented features
+        function showBillsListModal() {
+            debugLog('Showing bills management section');
+            showBillsManagement();
+        }
+        
+        function showBillsManagement() {
+            const section = document.getElementById('billsManagementSection');
+            section.style.display = 'block';
+            section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            refreshBillsList();
+        }
+        
+        function hideBillsManagement() {
+            debugLog('Hiding bills management section');
+            document.getElementById('billsManagementSection').style.display = 'none';
+        }
+        
+        function addBillFromForm(event) {
+            event.preventDefault();
+            debugLog('Adding bill from management form');
+            
+            const bill = {
+                name: document.getElementById('newBillName').value,
+                category: document.getElementById('newBillCategory').value,
+                recurrence: document.getElementById('newBillRecurrence').value,
+                day: document.getElementById('newBillDay').value,
+                action: document.getElementById('newBillAction').value,
+                amount: document.getElementById('newBillAmount').value || '0'
+            };
+            
+            config.recurringBills.push(bill);
+            localStorage.setItem('billflow_recurringBills', JSON.stringify(config.recurringBills));
+            
+            // Clear form
+            document.getElementById('newBillName').value = '';
+            document.getElementById('newBillCategory').value = '';
+            document.getElementById('newBillRecurrence').value = 'M';
+            document.getElementById('newBillDay').value = '';
+            document.getElementById('newBillAction').value = '*';
+            document.getElementById('newBillAmount').value = '';
+            
+            refreshBillsList();
+            
+            // Show success message
+            const successMsg = document.createElement('div');
+            successMsg.style.cssText = 'position: fixed; top: 20px; right: 20px; background: #4CAF50; color: white; padding: 15px 20px; border-radius: 6px; z-index: 1001; animation: slideDown 0.3s ease-out;';
+            successMsg.textContent = `✅ Added "${bill.name}" successfully!`;
+            document.body.appendChild(successMsg);
+            
+            setTimeout(() => {
+                successMsg.remove();
+            }, 3000);
+        }
+        
+        function refreshBillsList() {
+            debugLog('Refreshing recurring bills list');
+            const listContainer = document.getElementById('recurringBillsList');
+            
+            if (config.recurringBills.length === 0) {
+                listContainer.innerHTML = '<div style="padding: 20px; text-align: center; color: #666;">No recurring bills configured yet. Add some bills above!</div>';
+                return;
+            }
+            
+            const billsHTML = config.recurringBills.map((bill, index) => {
+                const actionBadge = bill.action === '*' ? 
+                    '<span class="bill-action-badge manual">Manual</span>' : 
+                    '<span class="bill-action-badge auto">Auto-Pay</span>';
+                
+                const recurrenceText = {
+                    'M': 'Monthly',
+                    'A': 'Annual', 
+                    'W': 'Weekly',
+                    'Q': 'Quarterly'
+                }[bill.recurrence] || bill.recurrence;
+                
+                return `
+                    <div class="recurring-bill-item">
+                        <div class="bill-info">
+                            <div class="bill-info-name">${bill.name}</div>
+                            <div class="bill-info-details">${bill.category} • ${recurrenceText} on ${bill.day}</div>
+                        </div>
+                        <div>${actionBadge}</div>
+                        <div style="text-align: right; font-weight: 500;">${parseFloat(bill.amount || 0).toFixed(2)}</div>
+                        <button class="edit-bill-btn" onclick="editBill(${index})">Edit</button>
+                        <button class="delete-bill-btn" onclick="deleteBill(${index})">Delete</button>
+                    </div>
+                `;
+            }).join('');
+            
+            listContainer.innerHTML = billsHTML;
+        }
+        
+        function editBill(index) {
+            debugLog('Editing bill:', index);
+            const bill = config.recurringBills[index];
+            
+            // Pre-fill the form with current values
+            document.getElementById('newBillName').value = bill.name;
+            document.getElementById('newBillCategory').value = bill.category;
+            document.getElementById('newBillRecurrence').value = bill.recurrence;
+            document.getElementById('newBillDay').value = bill.day;
+            document.getElementById('newBillAction').value = bill.action;
+            document.getElementById('newBillAmount').value = bill.amount;
+            
+            // Remove the old bill
+            config.recurringBills.splice(index, 1);
+            localStorage.setItem('billflow_recurringBills', JSON.stringify(config.recurringBills));
+            
+            refreshBillsList();
+            
+            // Scroll to form
+            document.getElementById('newBillName').scrollIntoView({ behavior: 'smooth', block: 'center' });
+            document.getElementById('newBillName').focus();
+            
+            // Show edit notice
+            const editMsg = document.createElement('div');
+            editMsg.style.cssText = 'position: fixed; top: 20px; right: 20px; background: #2196F3; color: white; padding: 15px 20px; border-radius: 6px; z-index: 1001;';
+            editMsg.textContent = `✏️ Editing "${bill.name}" - modify and click Add Bill to save changes`;
+            document.body.appendChild(editMsg);
+            
+            setTimeout(() => {
+                editMsg.remove();
+            }, 5000);
+        }
+        
+        function deleteBill(index) {
+            const bill = config.recurringBills[index];
+            
+            if (confirm(`Are you sure you want to delete "${bill.name}"?\n\nThis action cannot be undone.`)) {
+                debugLog('Deleting bill:', index);
+                config.recurringBills.splice(index, 1);
+                localStorage.setItem('billflow_recurringBills', JSON.stringify(config.recurringBills));
+                refreshBillsList();
+                
+                // Show delete confirmation
+                const deleteMsg = document.createElement('div');
+                deleteMsg.style.cssText = 'position: fixed; top: 20px; right: 20px; background: #f44336; color: white; padding: 15px 20px; border-radius: 6px; z-index: 1001;';
+                deleteMsg.textContent = `🗑️ Deleted "${bill.name}"`;
+                document.body.appendChild(deleteMsg);
+                
+                setTimeout(() => {
+                    deleteMsg.remove();
+                }, 3000);
+            }
+        }
+
+		// Add these variables at the top with your other global variables
+		let analyticsCharts = {
+			categoryPie: null,
+			statusDonut: null,
+			trendLine: null,
+			yoyComparison: null,
+			categoryTrend: null,
+			performance: null
+		};
+
+		// Replace the showAnalyticsModal function with this implementation
+		function showAnalyticsModal() {
+			debugLog('Showing analytics modal');
+			
+			if (allBills.length === 0) {
+				alert('Please load bill data first to view analytics.');
+				return;
+			}
+			
+			showModal('analyticsModal');
+			
+			// Initialize analytics with default period
+			setTimeout(() => {
+				updateAnalytics();
+			}, 100);
+		}
+
+		function showAnalyticsTab(tabName) {
+			debugLog('Switching to analytics tab:', tabName);
+			
+			// Update tab buttons
+			document.querySelectorAll('.analytics-tab').forEach(tab => {
+				tab.classList.remove('active');
+			});
+			event.target.classList.add('active');
+			
+			// Hide all tab content
+			document.querySelectorAll('.analytics-tab-content').forEach(content => {
+				content.style.display = 'none';
+			});
+			
+			// Show selected tab
+			document.getElementById(`analytics-${tabName}`).style.display = 'block';
+			
+			// Refresh charts for the selected tab
+			setTimeout(() => {
+				if (tabName === 'overview') {
+					updateOverviewCharts();
+				} else if (tabName === 'trends') {
+					updateTrendCharts();
+				} else if (tabName === 'categories') {
+					updateCategoryCharts();
+				} else if (tabName === 'performance') {
+					updatePerformanceCharts();
+				} else if (tabName === 'predictions') {
+					updatePredictions();
+				}
+			}, 100);
+		}
+
+		function updateAnalytics() {
+			debugLog('Updating analytics');
+			
+			const period = parseInt(document.getElementById('analyticsPeriod').value);
+			const analyticsData = calculateAnalyticsData(period);
+			
+			// Update overview stats
+			updateOverviewStats(analyticsData);
+			
+			// Update current tab's charts
+			const activeTab = document.querySelector('.analytics-tab.active').textContent.toLowerCase();
+			if (activeTab === 'overview') {
+				updateOverviewCharts();
+			} else if (activeTab === 'trends') {
+				updateTrendCharts();
+			} else if (activeTab === 'categories') {
+				updateCategoryCharts();
+			} else if (activeTab === 'performance') {
+				updatePerformanceCharts();
+			} else if (activeTab === 'predictions') {
+				updatePredictions();
+			}
+		}
+
+		function calculateAnalyticsData(periodMonths) {
+			const now = new Date();
+			let startDate;
+			
+			if (periodMonths === 0 || periodMonths === 'all') {
+				// All time - find earliest bill
+				startDate = new Date(Math.min(...allBills.map(b => new Date(b.date))));
+			} else {
+				startDate = new Date(now.getFullYear(), now.getMonth() - periodMonths + 1, 1);
+			}
+			
+			const filteredBills = allBills.filter(bill => {
+				const billDate = new Date(bill.date);
+				return billDate >= startDate;
+			});
+			
+			const paidBills = filteredBills.filter(b => b.status === 'x');
+			const unpaidBills = filteredBills.filter(b => b.status === '*');
+			const overdueBills = filteredBills.filter(b => b.status === 'R');
+			const dueSoonBills = filteredBills.filter(b => b.status === 'Y');
+			const autoPaidBills = filteredBills.filter(b => b.status === '=');
+			
+			// Calculate monthly totals
+			const monthlyTotals = {};
+			const categoryTotals = {};
+			const categoryMonthly = {};
+			
+			paidBills.forEach(bill => {
+				if (bill.amount > 0) {
+					const month = bill.date.substring(0, 7);
+					monthlyTotals[month] = (monthlyTotals[month] || 0) + bill.amount;
+					
+					categoryTotals[bill.category] = (categoryTotals[bill.category] || 0) + bill.amount;
+					
+					if (!categoryMonthly[bill.category]) categoryMonthly[bill.category] = {};
+					categoryMonthly[bill.category][month] = (categoryMonthly[bill.category][month] || 0) + bill.amount;
+				}
+			});
+			
+			const totalPaid = Object.values(monthlyTotals).reduce((sum, amt) => sum + amt, 0);
+			const monthCount = Object.keys(monthlyTotals).length || 1;
+			const avgMonthly = totalPaid / monthCount;
+			
+			// Payment performance
+			let onTimePayments = 0;
+			let latePayments = 0;
+			
+			paidBills.forEach(bill => {
+				// Only check bills that are marked as paid (status 'x')
+				if (bill.status === 'x' && bill.line) {
+					// Look for the pattern: x PAYMENT_DATE DUE_DATE
+					// Some bills might have: x DATE DATE (same date for payment and due)
+					const datePattern = /^x\s+(\d{4}-\d{2}-\d{2})\s+(\d{4}-\d{2}-\d{2})/;
+					const match = bill.line.match(datePattern);
+					
+					if (match) {
+						const paymentDateStr = match[1];  // First date is payment date
+						const dueDateStr = match[2];      // Second date is due date
+						const paymentDate = new Date(paymentDateStr + 'T00:00:00');
+						const dueDate = new Date(dueDateStr + 'T00:00:00');
+						
+						if (paymentDate > dueDate) {
+							latePayments++;
+						} else {
+							onTimePayments++;
+						}
+					} else {
+						// For bills with only one date or unclear format, count as on time
+						onTimePayments++;
+					}
+				}
+			});
+			
+			return {
+				filteredBills,
+				paidBills,
+				unpaidBills,
+				overdueBills,
+				dueSoonBills,
+				autoPaidBills,
+				monthlyTotals,
+				categoryTotals,
+				categoryMonthly,
+				totalPaid,
+				avgMonthly,
+				onTimePayments,
+				latePayments,
+				startDate,
+				monthCount
+			};
+		}
+
+		function updateOverviewStats(data) {
+			document.getElementById('avgMonthlySpend').textContent = '$' + data.avgMonthly.toFixed(2);
+			document.getElementById('totalPaidAmount').textContent = '$' + data.totalPaid.toFixed(2);
+			
+			const successRate = data.paidBills.length > 0 ? 
+				(data.onTimePayments / data.paidBills.length * 100).toFixed(1) : 0;
+			document.getElementById('paymentSuccessRate').textContent = successRate + '%';
+			
+			const topCategory = Object.entries(data.categoryTotals)
+				.sort((a, b) => b[1] - a[1])[0];
+			document.getElementById('topCategory').textContent = topCategory ? topCategory[0] : '-';
+		}
+
+		function updateOverviewCharts() {
+			const period = parseInt(document.getElementById('analyticsPeriod').value);
+			const data = calculateAnalyticsData(period);
+			
+			// Category Pie Chart
+			const categoryCtx = document.getElementById('categoryPieChart').getContext('2d');
+			
+			if (analyticsCharts.categoryPie) {
+				analyticsCharts.categoryPie.destroy();
+			}
+			
+			const sortedCategories = Object.entries(data.categoryTotals)
+				.sort((a, b) => b[1] - a[1])
+				.slice(0, 8); // Top 8 categories
+			
+			analyticsCharts.categoryPie = new Chart(categoryCtx, {
+				type: 'pie',
+				data: {
+					labels: sortedCategories.map(c => c[0]),
+					datasets: [{
+						data: sortedCategories.map(c => c[1]),
+						backgroundColor: [
+							'#4CAF50', '#2196F3', '#FF9800', '#F44336',
+							'#9C27B0', '#00BCD4', '#FFC107', '#795548'
+						]
+					}]
+				},
+				options: {
+					responsive: true,
+					maintainAspectRatio: false,
+					plugins: {
+						legend: {
+							position: 'bottom',
+							labels: { color: '#e0e0e0' }
+						},
+						tooltip: {
+							callbacks: {
+								label: function(context) {
+									const label = context.label || '';
+									const value = '$' + context.parsed.toFixed(2);
+									const percentage = ((context.parsed / data.totalPaid) * 100).toFixed(1);
+									return `${label}: ${value} (${percentage}%)`;
+								}
+							}
+						}
+					}
+				}
+			});
+			
+			// Status Donut Chart
+			const statusCtx = document.getElementById('statusDonutChart').getContext('2d');
+			
+			if (analyticsCharts.statusDonut) {
+				analyticsCharts.statusDonut.destroy();
+			}
+			
+			const statusCounts = {
+				'Paid': data.paidBills.length,
+				'Unpaid': data.unpaidBills.length,
+				'Auto-Pay': data.autoPaidBills.length,
+				'Overdue': data.overdueBills.length,
+				'Due Soon': data.dueSoonBills.length
+			};
+			
+			analyticsCharts.statusDonut = new Chart(statusCtx, {
+				type: 'doughnut',
+				data: {
+					labels: Object.keys(statusCounts),
+					datasets: [{
+						data: Object.values(statusCounts),
+						backgroundColor: ['#4CAF50', '#f44336', '#2196F3', '#f44336', '#ff9800']
+					}]
+				},
+				options: {
+					responsive: true,
+					maintainAspectRatio: false,
+					plugins: {
+						legend: {
+							position: 'bottom',
+							labels: { color: '#e0e0e0' }
+						}
+					}
+				}
+			});
+		}
+
+		function updateTrendCharts() {
+			const period = parseInt(document.getElementById('analyticsPeriod').value);
+			const data = calculateAnalyticsData(period);
+			
+			// Monthly Trend Line Chart
+			const trendCtx = document.getElementById('trendLineChart').getContext('2d');
+			
+			if (analyticsCharts.trendLine) {
+				analyticsCharts.trendLine.destroy();
+			}
+			
+			const months = Object.keys(data.monthlyTotals).sort();
+			const monthLabels = months.map(m => {
+				const [year, month] = m.split('-');
+				return new Date(year, month - 1).toLocaleDateString('en-US', { month: 'short', year: '2-digit' });
+			});
+			
+			// Calculate moving average
+			const values = months.map(m => data.monthlyTotals[m]);
+			const movingAvg = values.map((val, idx) => {
+				if (idx < 2) return val;
+				return (values[idx] + values[idx-1] + values[idx-2]) / 3;
+			});
+			
+			analyticsCharts.trendLine = new Chart(trendCtx, {
+				type: 'line',
+				data: {
+					labels: monthLabels,
+					datasets: [{
+						label: 'Monthly Spending',
+						data: values,
+						borderColor: '#4CAF50',
+						backgroundColor: 'rgba(76, 175, 80, 0.1)',
+						tension: 0.1
+					}, {
+						label: '3-Month Average',
+						data: movingAvg,
+						borderColor: '#2196F3',
+						borderDash: [5, 5],
+						fill: false
+					}]
+				},
+				options: {
+					responsive: true,
+					maintainAspectRatio: false,
+					scales: {
+						y: {
+							beginAtZero: true,
+							ticks: {
+								callback: function(value) {
+									return '$' + value.toLocaleString();
+								},
+								color: '#e0e0e0'
+							}
+						},
+						x: {
+							ticks: { color: '#e0e0e0' }
+						}
+					},
+					plugins: {
+						legend: {
+							labels: { color: '#e0e0e0' }
+						}
+					}
+				}
+			});
+			
+			// Year-over-Year Comparison
+			const yoyCtx = document.getElementById('yoyComparisonChart').getContext('2d');
+			
+			if (analyticsCharts.yoyComparison) {
+				analyticsCharts.yoyComparison.destroy();
+			}
+			
+			// Group by year and month
+			const yearData = {};
+			months.forEach(monthStr => {
+				const [year, month] = monthStr.split('-');
+				if (!yearData[year]) yearData[year] = {};
+				yearData[year][month] = data.monthlyTotals[monthStr];
+			});
+			
+			const years = Object.keys(yearData).sort();
+			const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+			
+			const datasets = years.map((year, idx) => ({
+				label: year,
+				data: monthNames.map((_, monthIdx) => yearData[year][String(monthIdx + 1).padStart(2, '0')] || 0),
+				borderColor: ['#4CAF50', '#2196F3', '#FF9800'][idx % 3],
+				fill: false
+			}));
+			
+			analyticsCharts.yoyComparison = new Chart(yoyCtx, {
+				type: 'line',
+				data: {
+					labels: monthNames,
+					datasets: datasets
+				},
+				options: {
+					responsive: true,
+					maintainAspectRatio: false,
+					scales: {
+						y: {
+							beginAtZero: true,
+							ticks: {
+								callback: function(value) {
+									return '$' + value.toLocaleString();
+								},
+								color: '#e0e0e0'
+							}
+						},
+						x: {
+							ticks: { color: '#e0e0e0' }
+						}
+					},
+					plugins: {
+						legend: {
+							labels: { color: '#e0e0e0' }
+						}
+					}
+				}
+			});
+		}
+
+		function updateCategoryCharts() {
+			const period = parseInt(document.getElementById('analyticsPeriod').value);
+			const data = calculateAnalyticsData(period);
+			
+			// Category Trend Chart
+			const catTrendCtx = document.getElementById('categoryTrendChart').getContext('2d');
+			
+			if (analyticsCharts.categoryTrend) {
+				analyticsCharts.categoryTrend.destroy();
+			}
+			
+			const months = Object.keys(data.monthlyTotals).sort();
+			const monthLabels = months.map(m => {
+				const [year, month] = m.split('-');
+				return new Date(year, month - 1).toLocaleDateString('en-US', { month: 'short', year: '2-digit' });
+			});
+			
+			// Get top 5 categories
+			const topCategories = Object.entries(data.categoryTotals)
+				.sort((a, b) => b[1] - a[1])
+				.slice(0, 5)
+				.map(c => c[0]);
+			
+			const colors = ['#4CAF50', '#2196F3', '#FF9800', '#F44336', '#9C27B0'];
+			
+			const datasets = topCategories.map((category, idx) => ({
+				label: category,
+				data: months.map(month => data.categoryMonthly[category]?.[month] || 0),
+				borderColor: colors[idx],
+				backgroundColor: colors[idx] + '20',
+				fill: true
+			}));
+			
+			analyticsCharts.categoryTrend = new Chart(catTrendCtx, {
+				type: 'line',
+				data: {
+					labels: monthLabels,
+					datasets: datasets
+				},
+				options: {
+					responsive: true,
+					maintainAspectRatio: false,
+					scales: {
+						y: {
+							beginAtZero: true,
+							stacked: true,
+							ticks: {
+								callback: function(value) {
+									return '$' + value.toLocaleString();
+								},
+								color: '#e0e0e0'
+							}
+						},
+						x: {
+							ticks: { color: '#e0e0e0' }
+						}
+					},
+					plugins: {
+						legend: {
+							labels: { color: '#e0e0e0' }
+						}
+					}
+				}
+			});
+			
+			// Category Detail Cards
+			const detailsGrid = document.getElementById('categoryDetailsGrid');
+			detailsGrid.innerHTML = Object.entries(data.categoryTotals)
+				.sort((a, b) => b[1] - a[1])
+				.map(([category, total]) => {
+					const percentage = ((total / data.totalPaid) * 100).toFixed(1);
+					const billCount = data.paidBills.filter(b => b.category === category).length;
+					const avgPerBill = billCount > 0 ? (total / billCount).toFixed(2) : '0.00';
+					
+					return `
+						<div class="category-detail-card">
+							<h4>${category}</h4>
+							<div style="font-size: 1.5em; font-weight: bold; margin: 10px 0;">
+								$${total.toFixed(2)}
+							</div>
+							<div style="color: #888; font-size: 0.9em;">
+								${percentage}% of total
+							</div>
+							<div style="color: #888; font-size: 0.9em;">
+								${billCount} bills • Avg: $${avgPerBill}
+							</div>
+						</div>
+					`;
+				}).join('');
+		}
+
+		function updatePerformanceCharts() {
+			const period = parseInt(document.getElementById('analyticsPeriod').value);
+			const data = calculateAnalyticsData(period);
+			
+			// Update performance stats
+			document.getElementById('onTimePayments').textContent = data.onTimePayments;
+			document.getElementById('latePayments').textContent = data.latePayments;
+			document.getElementById('overdueBills').textContent = data.overdueBills.length;
+			
+			const autoPayTotal = data.autoPaidBills.length;
+			const autoPaySuccess = autoPayTotal > 0 ? 100 : 0; // Assuming all auto-pays are successful
+			document.getElementById('autoPaySuccess').textContent = autoPaySuccess + '%';
+			
+			// Performance Timeline Chart
+			const perfCtx = document.getElementById('performanceChart').getContext('2d');
+			
+			if (analyticsCharts.performance) {
+				analyticsCharts.performance.destroy();
+			}
+			
+			// Group bills by month and status
+			const monthlyPerformance = {};
+			data.filteredBills.forEach(bill => {
+				const month = bill.date.substring(0, 7);
+				if (!monthlyPerformance[month]) {
+					monthlyPerformance[month] = { onTime: 0, late: 0, overdue: 0 };
+				}
+				
+				if (bill.status === 'x') {
+					// Check if on time using regex to properly parse dates
+					const datePattern = /^x\s+(\d{4}-\d{2}-\d{2})\s+(\d{4}-\d{2}-\d{2})/;
+					const match = bill.line.match(datePattern);
+					
+					if (match) {
+						const paymentDate = new Date(match[1] + 'T00:00:00');
+						const dueDate = new Date(match[2] + 'T00:00:00');
+						
+						if (paymentDate > dueDate) {
+							monthlyPerformance[month].late++;
+						} else {
+							monthlyPerformance[month].onTime++;
+						}
+					} else {
+						monthlyPerformance[month].onTime++; // Default to on time if format unclear
+					}
+				} else if (bill.status === 'R') {
+					monthlyPerformance[month].overdue++;
+				}
+			});
+			
+			const months = Object.keys(monthlyPerformance).sort();
+			const monthLabels = months.map(m => {
+				const [year, month] = m.split('-');
+				return new Date(year, month - 1).toLocaleDateString('en-US', { month: 'short', year: '2-digit' });
+			});
+			
+			analyticsCharts.performance = new Chart(perfCtx, {
+				type: 'bar',
+				data: {
+					labels: monthLabels,
+					datasets: [{
+						label: 'On Time',
+						data: months.map(m => monthlyPerformance[m].onTime),
+						backgroundColor: '#4CAF50'
+					}, {
+						label: 'Late',
+						data: months.map(m => monthlyPerformance[m].late),
+						backgroundColor: '#ff9800'
+					}, {
+						label: 'Overdue',
+						data: months.map(m => monthlyPerformance[m].overdue),
+						backgroundColor: '#f44336'
+					}]
+				},
+				options: {
+					responsive: true,
+					maintainAspectRatio: false,
+					scales: {
+						y: {
+							beginAtZero: true,
+							stacked: true,
+							ticks: { color: '#e0e0e0' }
+						},
+						x: {
+							stacked: true,
+							ticks: { color: '#e0e0e0' }
+						}
+					},
+					plugins: {
+						legend: {
+							labels: { color: '#e0e0e0' }
+						}
+					}
+				}
+			});
+			
+			// Bill Performance List
+			const perfList = document.getElementById('billPerformanceList');
+			
+			// Group bills by name to show performance
+			const billPerformance = {};
+			data.paidBills.forEach(bill => {
+				if (!billPerformance[bill.name]) {
+					billPerformance[bill.name] = { total: 0, onTime: 0, amounts: [] };
+				}
+				billPerformance[bill.name].total++;
+				billPerformance[bill.name].amounts.push(bill.amount);
+				
+				// Check if on time using regex
+				const datePattern = /^x\s+(\d{4}-\d{2}-\d{2})\s+(\d{4}-\d{2}-\d{2})/;
+				const match = bill.line.match(datePattern);
+				
+				if (match) {
+					const paymentDate = new Date(match[1] + 'T00:00:00');
+					const dueDate = new Date(match[2] + 'T00:00:00');
+					
+					if (paymentDate <= dueDate) {
+						billPerformance[bill.name].onTime++;
+					}
+					// If payment date > due date, it's late, but we don't increment onTime
+				} else {
+					billPerformance[bill.name].onTime++; // Default to on time if format unclear
+				}
+			});
+			
+			perfList.innerHTML = '<h3 style="color: #4CAF50; margin-bottom: 15px;">Bill Payment Performance</h3>' +
+				Object.entries(billPerformance)
+					.sort((a, b) => b[1].total - a[1].total)
+					.slice(0, 10)
+					.map(([name, perf]) => {
+						const successRate = ((perf.onTime / perf.total) * 100).toFixed(0);
+						const avgAmount = perf.amounts.reduce((a, b) => a + b, 0) / perf.amounts.length;
+						const color = successRate >= 90 ? '#4CAF50' : successRate >= 75 ? '#ff9800' : '#f44336';
+						
+						return `
+							<div class="performance-item">
+								<div>
+									<div style="font-weight: 500;">${name}</div>
+									<div style="font-size: 0.8em; color: #888;">
+										${perf.total} payments • Avg: $${avgAmount.toFixed(2)}
+									</div>
+								</div>
+								<div style="text-align: right;">
+									<div style="font-size: 1.2em; font-weight: bold; color: ${color};">
+										${successRate}%
+									</div>
+									<div style="font-size: 0.8em; color: #888;">
+										on time
+									</div>
+								</div>
+							</div>
+						`;
+					}).join('');
+		}
+
+		function updatePredictions() {
+			const nextMonth = new Date();
+			nextMonth.setMonth(nextMonth.getMonth() + 1);
+			const nextMonthStr = nextMonth.toISOString().substring(0, 7);
+			const nextMonthName = nextMonth.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+			
+			// Get recurring bills for next month
+			const recurringBills = config.recurringBills || [];
+			const nextMonthBills = [];
+			
+			recurringBills.forEach(bill => {
+				if (bill.recurrence === 'M' || 
+					(bill.recurrence === 'A' && bill.day.includes(nextMonthStr))) {
+					nextMonthBills.push({
+						name: bill.name,
+						category: bill.category,
+						amount: parseFloat(bill.amount || 0),
+						action: bill.action
+					});
+				}
+			});
+			
+			const totalPredicted = nextMonthBills.reduce((sum, b) => sum + b.amount, 0);
+			
+			// Calculate historical average
+			const data = calculateAnalyticsData(6);
+			const historicalAvg = data.avgMonthly;
+			
+			// Forecast display
+			const forecastDiv = document.getElementById('nextMonthForecast');
+			forecastDiv.innerHTML = `
+				<div style="font-size: 1.2em; margin-bottom: 20px;">
+					<strong>Forecast for ${nextMonthName}:</strong>
+				</div>
+				
+				<div class="stats-grid" style="margin-bottom: 20px;">
+					<div class="stat-card">
+						<div class="stat-label">Expected Bills</div>
+						<div class="stat-value">${nextMonthBills.length}</div>
+					</div>
+					<div class="stat-card">
+						<div class="stat-label">Predicted Total</div>
+						<div class="stat-value">$${totalPredicted.toFixed(2)}</div>
+					</div>
+					<div class="stat-card">
+						<div class="stat-label">6-Month Average</div>
+						<div class="stat-value">$${historicalAvg.toFixed(2)}</div>
+					</div>
+					<div class="stat-card">
+						<div class="stat-label">Variance</div>
+						<div class="stat-value" style="color: ${totalPredicted > historicalAvg ? '#f44336' : '#4CAF50'}">
+							${totalPredicted > historicalAvg ? '+' : ''}$${(totalPredicted - historicalAvg).toFixed(2)}
+						</div>
+					</div>
+				</div>
+				
+				<h4 style="margin-bottom: 10px;">Expected Bills:</h4>
+				${nextMonthBills.sort((a, b) => b.amount - a.amount).map(bill => `
+					<div class="forecast-item">
+						<div>
+							<span style="font-weight: 500;">${bill.name}</span>
+							<span style="color: #888; font-size: 0.9em; margin-left: 10px;">${bill.category}</span>
+						</div>
+						<div style="font-weight: 500;">$${bill.amount.toFixed(2)}</div>
+					</div>
+				`).join('')}
+			`;
+			
+			// Insights and recommendations
+			const insights = [];
+			
+			// Spending trend insight
+			if (data.monthlyTotals) {
+				const months = Object.keys(data.monthlyTotals).sort();
+				if (months.length >= 3) {
+					const recent = months.slice(-3).map(m => data.monthlyTotals[m]);
+					const trend = recent[2] - recent[0];
+					if (Math.abs(trend) > 100) {
+						insights.push({
+							type: trend > 0 ? 'warning' : 'success',
+							title: trend > 0 ? 'Spending Increasing' : 'Spending Decreasing',
+							text: `Your spending has ${trend > 0 ? 'increased' : 'decreased'} by $${Math.abs(trend).toFixed(2)} over the last 3 months.`
+						});
+					}
+				}
+			}
+			
+			// Category insights
+			const topCategory = Object.entries(data.categoryTotals)
+				.sort((a, b) => b[1] - a[1])[0];
+			if (topCategory) {
+				const categoryPercent = ((topCategory[1] / data.totalPaid) * 100).toFixed(0);
+				if (categoryPercent > 30) {
+					insights.push({
+						type: 'info',
+						title: 'High Category Concentration',
+						text: `${topCategory[0]} accounts for ${categoryPercent}% of your spending. Consider reviewing these expenses.`
+					});
+				}
+			}
+			
+			// Payment performance insight
+			if (data.paidBills.length > 0) {
+				const successRate = (data.onTimePayments / data.paidBills.length * 100);
+				if (successRate < 90) {
+					insights.push({
+						type: 'warning',
+						title: 'Payment Timing Alert',
+						text: `Only ${successRate.toFixed(0)}% of bills are paid on time. Consider setting up auto-pay or reminders.`
+					});
+				} else {
+					insights.push({
+						type: 'success',
+						title: 'Excellent Payment Record',
+						text: `${successRate.toFixed(0)}% of bills paid on time. Keep up the great work!`
+					});
+				}
+			}
+			
+			// Overdue bills alert
+			if (data.overdueBills.length > 0) {
+				insights.push({
+					type: 'danger',
+					title: 'Overdue Bills',
+					text: `You have ${data.overdueBills.length} overdue bill${data.overdueBills.length > 1 ? 's' : ''}. Address these immediately to avoid late fees.`
+				});
+			}
+			
+			const insightsDiv = document.getElementById('analyticsInsights');
+			insightsDiv.innerHTML = insights.map(insight => {
+				const colors = {
+					success: '#4CAF50',
+					warning: '#ff9800',
+					danger: '#f44336',
+					info: '#2196F3'
+				};
+				
+				return `
+					<div class="insight-item" style="border-left-color: ${colors[insight.type]};">
+						<div style="font-weight: 500; margin-bottom: 5px;">${insight.title}</div>
+						<div style="color: #aaa; font-size: 0.9em;">${insight.text}</div>
+					</div>
+				`;
+			}).join('');
+			
+			if (insights.length === 0) {
+				insightsDiv.innerHTML = '<div style="text-align: center; color: #888;">No specific insights available. Keep tracking your bills!</div>';
+			}
+		}
+
+		function exportAnalyticsReport() {
+			debugLog('Exporting analytics report');
+			
+			const period = parseInt(document.getElementById('analyticsPeriod').value);
+			const data = calculateAnalyticsData(period);
+			
+			let report = `BillFlow Analytics Report
+		Generated: ${new Date().toLocaleString()}
+		Period: ${period === 0 ? 'All Time' : `Last ${period} Months`}
+
+		OVERVIEW
+		========
+		Total Paid: ${data.totalPaid.toFixed(2)}
+		Average Monthly Spend: ${data.avgMonthly.toFixed(2)}
+		Payment Success Rate: ${data.paidBills.length > 0 ? (data.onTimePayments / data.paidBills.length * 100).toFixed(1) : 0}%
+
+		CATEGORY BREAKDOWN
+		==================
+		`;
+			
+			Object.entries(data.categoryTotals)
+				.sort((a, b) => b[1] - a[1])
+				.forEach(([category, total]) => {
+					const percentage = ((total / data.totalPaid) * 100).toFixed(1);
+					report += `${category}: ${total.toFixed(2)} (${percentage}%)\n`;
+				});
+			
+			report += `
+		PAYMENT PERFORMANCE
+		===================
+		On-Time Payments: ${data.onTimePayments}
+		Late Payments: ${data.latePayments}
+		Currently Overdue: ${data.overdueBills.length}
+
+		MONTHLY TOTALS
+		==============
+		`;
+			
+			Object.entries(data.monthlyTotals)
+				.sort((a, b) => a[0].localeCompare(b[0]))
+				.forEach(([month, total]) => {
+					report += `${month}: ${total.toFixed(2)}\n`;
+				});
+			
+			// Download the report
+			const blob = new Blob([report], { type: 'text/plain' });
+			const url = URL.createObjectURL(blob);
+			const a = document.createElement('a');
+			a.href = url;
+			a.download = `BillFlow_Analytics_${new Date().toISOString().substring(0, 10)}.txt`;
+			a.click();
+			
+			// Show success message
+			const successMsg = document.createElement('div');
+			successMsg.style.cssText = 'position: fixed; top: 20px; right: 20px; background: #4CAF50; color: white; padding: 15px 20px; border-radius: 6px; z-index: 1001;';
+			successMsg.textContent = '✅ Analytics report exported successfully!';
+			document.body.appendChild(successMsg);
+			
+			setTimeout(() => {
+				successMsg.remove();
+			}, 3000);
+		}
+
+		// Debug function to check payment calculations
+		function debugPaymentCalculations() {
+			const period = 3; // Last 3 months
+			const data = calculateAnalyticsData(period);
+			
+			console.log('=== PAYMENT CALCULATIONS DEBUG ===');
+			console.log(`Total paid bills: ${data.paidBills.length}`);
+			console.log(`On-time payments: ${data.onTimePayments}`);
+			console.log(`Late payments: ${data.latePayments}`);
+			console.log('');
+			
+			// Show details for each paid bill
+			data.paidBills.forEach(bill => {
+				if (bill.status === 'x' && bill.line) {
+					const datePattern = /^x\s+(\d{4}-\d{2}-\d{2})\s+(\d{4}-\d{2}-\d{2})/;
+					const match = bill.line.match(datePattern);
+					
+					if (match) {
+						const paymentDate = new Date(match[1] + 'T00:00:00');
+						const dueDate = new Date(match[2] + 'T00:00:00');
+						const isLate = paymentDate > dueDate;
+						const daysDiff = Math.floor((dueDate - paymentDate) / (1000 * 60 * 60 * 24));
+						
+						console.log(`${bill.name}:`);
+						console.log(`  Line: ${bill.line}`);
+						console.log(`  Paid: ${match[1]}, Due: ${match[2]}`);
+						console.log(`  Late? ${isLate} (${daysDiff} days ${isLate ? 'late' : 'early'})`);
+						console.log('');
+					} else {
+						console.log(`${bill.name}: Could not parse dates from "${bill.line}"`);
+					}
+				}
+			});
+		}
+        function showBackupModal() {
+            debugLog('Showing backup modal');
+            updateBackupStatus();
+            loadLocalBackupsList();
+            showModal('backupModal');
+        }
+        
+        function updateBackupStatus() {
+            // Update current data summary
+            document.getElementById('configStatus').textContent = 
+                config.billsPath ? 'Configured' : 'Not configured';
+            document.getElementById('billsStatus').textContent = 
+                `${config.recurringBills.length} bills`;
+            document.getElementById('emailStatus').textContent = 
+                config.emailEnabled ? 'Configured' : 'Not configured';
+            document.getElementById('trackerStatus').textContent = 
+                currentFile ? `File loaded (${allBills.length} bills)` : 'No file loaded';
+        }
+        
+        function updateBackupOptions() {
+            const backupType = document.getElementById('backupType').value;
+            // Could add different options based on backup type
+            debugLog('Backup type changed to:', backupType);
+        }
+        
+        function toggleIncludePassword() {
+            document.getElementById('includePasswordToggle').classList.toggle('active');
+        }
+        
+        function toggleSaveToBrowser() {
+            document.getElementById('saveToBrowserToggle').classList.toggle('active');
+        }
+        
+        function createBackup() {
+            debugLog('Creating backup');
+            const backupType = document.getElementById('backupType').value;
+            const includePassword = document.getElementById('includePasswordToggle').classList.contains('active');
+            const saveToBrowser = document.getElementById('saveToBrowserToggle').classList.contains('active');
+            
+            try {
+                const backup = generateBackupData(backupType, includePassword);
+                const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+                const typeLabel = backupType === 'complete' ? 'Complete' : 'Quick';
+                const filename = `BillFlow_${typeLabel}Backup_${timestamp.substring(0, 19)}.json`;
+                
+                // Save to browser storage if requested
+                if (saveToBrowser) {
+                    saveBackupToBrowser(backup, timestamp);
+                }
+                
+                // Always download the backup file
+                const blob = new Blob([JSON.stringify(backup, null, 2)], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = filename;
+                a.click();
+                
+                // Show success message
+                const successMsg = document.createElement('div');
+                successMsg.style.cssText = 'position: fixed; top: 20px; right: 20px; background: #4CAF50; color: white; padding: 15px 20px; border-radius: 6px; z-index: 1001;';
+                successMsg.textContent = `✅ Backup created: ${filename}`;
+                document.body.appendChild(successMsg);
+                
+                setTimeout(() => {
+                    successMsg.remove();
+                }, 4000);
+                
+                // Refresh local backups list
+                loadLocalBackupsList();
+                
+            } catch (error) {
+                debugLog('Error creating backup:', error);
+                alert('Error creating backup: ' + error.message);
+            }
+        }
+        
+        function generateBackupData(backupType, includePassword) {
+            const backup = {
+                metadata: {
+                    version: '1.0.0',
+                    type: backupType,
+                    timestamp: new Date().toISOString(),
+                    platform: navigator.platform,
+                    userAgent: navigator.userAgent.substring(0, 100)
+                },
+                configuration: {
+                    billsPath: config.billsPath,
+                    trackerPath: config.trackerPath,
+                    backupPath: config.backupPath,
+                    daysWarning: config.daysWarning,
+                    emailConfig: {
+                        enabled: config.emailEnabled,
+                        emailAddress: config.emailAddress,
+                        smtpServer: config.smtpServer,
+                        smtpPort: config.smtpPort,
+                        username: config.emailUsername,
+                        password: includePassword ? config.emailPassword : '',
+                        dailySummary: config.dailySummary,
+                        dueSoonAlerts: config.dueSoonAlerts,
+                        overdueWarnings: config.overdueWarnings,
+                        summaryTime: config.summaryTime,
+                        alertDaysAhead: config.alertDaysAhead
+                    }
+                },
+                recurringBills: config.recurringBills,
+                statistics: {
+                    totalBills: config.recurringBills.length,
+                    emailConfigured: config.emailEnabled,
+                    hasTrackerData: allBills.length > 0,
+                    trackerBillCount: allBills.length
+                }
+            };
+            
+            // Add tracker data for complete backups
+            if (backupType === 'complete' && currentFile && allBills.length > 0) {
+                // Try to get the original file content if possible
+                let originalContent = '';
+                if (currentFile && currentFile.size) {
+                    // For future enhancement - we could store the raw file content
+                    // For now, reconstruct from bill data
+                    originalContent = allBills.map(bill => 
+                        bill.line || `${bill.status} ${bill.date} ${bill.name}${bill.category ? ' [' + bill.category + ']' : ''}${bill.amount ? ' ;; ' + bill.amount : ''}`
+                    ).join('\n');
+                }
+                
+                backup.trackerData = {
+                    filename: currentFile.name,
+                    lastModified: fileLastModified,
+                    bills: allBills,
+                    categories: Array.from(categories),
+                    originalContent: originalContent,
+                    fileSize: currentFile.size || originalContent.length
+                };
+            }
+            
+            return backup;
+        }
+        
+        function saveBackupToBrowser(backup, timestamp) {
+            try {
+                debugLog('Attempting to save backup to browser storage...');
+                
+                const backups = JSON.parse(localStorage.getItem('billflow_localBackups') || '[]');
+                const backupEntry = {
+                    id: timestamp,
+                    timestamp: backup.metadata.timestamp,
+                    type: backup.metadata.type,
+                    data: backup
+                };
+                
+                // Check size before saving
+                const backupSize = JSON.stringify(backupEntry).length;
+                const totalSize = JSON.stringify(backups).length + backupSize;
+                
+                debugLog('Backup size info:', {
+                    currentBackupSize: Math.round(backupSize / 1024) + ' KB',
+                    currentTotalSize: Math.round(totalSize / 1024) + ' KB',
+                    existingBackups: backups.length,
+                    billsCount: backup.recurringBills?.length || 0,
+                    trackerBillsCount: backup.trackerData?.bills?.length || 0
+                });
+                
+                // Check if we're approaching localStorage limits (roughly 5MB)
+                if (totalSize > 4 * 1024 * 1024) { // 4MB warning threshold
+                    console.warn('Approaching localStorage limit, clearing old backups...');
+                    // Keep only last 5 backups instead of 10
+                    backups.splice(5);
+                }
+                
+                backups.unshift(backupEntry); // Add to beginning
+                
+                // Keep only last 10 backups
+                if (backups.length > 10) {
+                    backups.splice(10);
+                }
+                
+                // Try to save
+                localStorage.setItem('billflow_localBackups', JSON.stringify(backups));
+                
+                // Verify it was saved
+                const saved = localStorage.getItem('billflow_localBackups');
+                if (saved) {
+                    const parsedSaved = JSON.parse(saved);
+                    debugLog('Backup saved successfully to browser storage', {
+                        savedBackups: parsedSaved.length,
+                        latestBackupId: parsedSaved[0]?.id,
+                        totalStorageSize: Math.round(saved.length / 1024) + ' KB'
+                    });
+                } else {
+                    throw new Error('Backup was not saved to localStorage');
+                }
+                
+            } catch (error) {
+                debugLog('Error saving backup to browser:', error);
+                
+                // Show user-friendly error
+                const errorMsg = document.createElement('div');
+                errorMsg.style.cssText = 'position: fixed; top: 20px; right: 20px; background: #f44336; color: white; padding: 15px 20px; border-radius: 6px; z-index: 1001;';
+                
+                if (error.name === 'QuotaExceededError') {
+                    errorMsg.textContent = '⚠️ Browser storage full! Backup downloaded but not saved locally.';
+                } else {
+                    errorMsg.textContent = '⚠️ Could not save backup to browser storage: ' + error.message;
+                }
+                
+                document.body.appendChild(errorMsg);
+                setTimeout(() => {
+                    errorMsg.remove();
+                }, 6000);
+            }
+        }
+        
+        function loadLocalBackupsList() {
+            try {
+                const backups = JSON.parse(localStorage.getItem('billflow_localBackups') || '[]');
+                const listContainer = document.getElementById('localBackupsList');
+                
+                debugLog('Loading local backups list:', {
+                    backupsFound: backups.length,
+                    storageSize: localStorage.getItem('billflow_localBackups')?.length || 0
+                });
+                
+                if (backups.length === 0) {
+                    listContainer.innerHTML = `
+                        <div style="color: #666; text-align: center;">
+                            No local backups found
+                            <br>
+                            <button onclick="debugLocalStorage()" style="margin-top: 10px; padding: 5px 10px; background: #333; border: 1px solid #555; color: #ccc; border-radius: 4px; font-size: 0.8em;">
+                                Debug Storage
+                            </button>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                const backupsHTML = backups.map((backup, index) => {
+                    const date = new Date(backup.timestamp);
+                    const dateStr = date.toLocaleDateString() + ' ' + date.toLocaleTimeString();
+                    const typeStr = backup.type === 'complete' ? 'Complete' : 'Quick';
+                    const billsCount = backup.data?.recurringBills?.length || 0;
+                    const trackerCount = backup.data?.trackerData?.bills?.length || 0;
+                    
+                    return `
+                        <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px; border-bottom: 1px solid #333; ${index === backups.length - 1 ? 'border-bottom: none;' : ''}">
+                            <div>
+                                <div style="font-weight: 500;">${typeStr} Backup</div>
+                                <div style="font-size: 0.8em; color: #888;">${dateStr}</div>
+                                <div style="font-size: 0.7em; color: #666;">${billsCount} bills${trackerCount ? `, ${trackerCount} tracker` : ''}</div>
+                            </div>
+                            <button onclick="restoreFromLocal('${backup.id}')" class="btn-secondary" style="padding: 5px 10px; font-size: 0.8em;">
+                                Restore
+                            </button>
+                        </div>
+                    `;
+                }).join('');
+                
+                listContainer.innerHTML = backupsHTML;
+            } catch (error) {
+                debugLog('Error loading local backups:', error);
+                document.getElementById('localBackupsList').innerHTML = `
+                    <div style="color: #f44336;">
+                        Error loading backups: ${error.message}
+                        <br>
+                        <button onclick="debugLocalStorage()" style="margin-top: 10px; padding: 5px 10px; background: #333; border: 1px solid #555; color: #ccc; border-radius: 4px; font-size: 0.8em;">
+                            Debug Storage
+                        </button>
+                    </div>
+                `;
+            }
+        }
+        
+        function debugLocalStorage() {
+            try {
+                const allKeys = Object.keys(localStorage).filter(key => key.startsWith('billflow_'));
+                const backupsRaw = localStorage.getItem('billflow_localBackups');
+                
+                let debug = 'LocalStorage Debug Info:\n\n';
+                debug += `BillFlow Keys Found: ${allKeys.length}\n`;
+                debug += `Keys: ${allKeys.join(', ')}\n\n`;
+                
+                if (backupsRaw) {
+                    debug += `Backups Storage Size: ${Math.round(backupsRaw.length / 1024)} KB\n`;
+                    try {
+                        const backups = JSON.parse(backupsRaw);
+                        debug += `Backups Count: ${backups.length}\n`;
+                        backups.forEach((backup, i) => {
+                            debug += `  ${i + 1}. ${backup.type} - ${new Date(backup.timestamp).toLocaleString()}\n`;
+                        });
+                    } catch (e) {
+                        debug += `Error parsing backups: ${e.message}\n`;
+                    }
+                } else {
+                    debug += 'No backups found in localStorage\n';
+                }
+                
+                debug += `\nTotal localStorage Usage: ${Math.round(JSON.stringify(localStorage).length / 1024)} KB`;
+                
+                alert(debug);
+                
+                console.log('LocalStorage Debug:', {
+                    allKeys,
+                    backupsRaw: backupsRaw?.substring(0, 200) + '...',
+                    fullStorage: localStorage
+                });
+                
+            } catch (error) {
+                alert('Debug error: ' + error.message);
+            }
+        }
+        
+        function showBackupPreview() {
+            const backupType = document.getElementById('backupType').value;
+            const includePassword = document.getElementById('includePasswordToggle').classList.contains('active');
+            
+            try {
+                const backup = generateBackupData(backupType, includePassword);
+                const preview = `Backup Preview:
+                
+📦 Type: ${backup.metadata.type === 'complete' ? 'Complete' : 'Quick'} Backup
+📅 Timestamp: ${new Date(backup.metadata.timestamp).toLocaleString()}
+
+📋 Contents:
+• Configuration: ${backup.configuration.billsPath ? 'Yes' : 'No'}
+• Email Settings: ${backup.configuration.emailConfig.enabled ? 'Yes' : 'No'}
+• Email Password: ${backup.configuration.emailConfig.password ? 'Included' : 'Not included'}
+• Recurring Bills: ${backup.recurringBills.length} bills
+• Tracker Data: ${backup.trackerData ? 'Yes (' + backup.trackerData.bills.length + ' bills)' : 'No'}
+
+💾 Estimated Size: ${Math.round(JSON.stringify(backup).length / 1024)} KB`;
+                
+                alert(preview);
+            } catch (error) {
+                alert('Error generating preview: ' + error.message);
+            }
+        }
+        
+        function handleRestoreFile(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            
+            document.getElementById('restoreFileName').textContent = file.name;
+            document.getElementById('restoreOptions').style.display = 'block';
+            document.getElementById('restoreButton').disabled = false;
+            
+            // Store file for restoration
+            window.restoreFile = file;
+        }
+        
+        function restoreFromLocal(backupId) {
+            try {
+                debugLog('Starting LocalStorage restore for backup ID:', backupId);
+                
+                const backups = JSON.parse(localStorage.getItem('billflow_localBackups') || '[]');
+                const backup = backups.find(b => b.id === backupId);
+                
+                if (!backup) {
+                    alert('Backup not found!');
+                    return;
+                }
+                
+                debugLog('Found backup for restore:', {
+                    id: backup.id,
+                    type: backup.type,
+                    timestamp: backup.timestamp,
+                    hasData: !!backup.data,
+                    dataKeys: backup.data ? Object.keys(backup.data) : [],
+                    recurringBillsCount: backup.data?.recurringBills?.length || 0,
+                    trackerDataExists: !!backup.data?.trackerData,
+                    trackerBillsCount: backup.data?.trackerData?.bills?.length || 0
+                });
+                
+                const typeStr = backup.type === 'complete' ? 'Complete' : 'Quick';
+                const hasTracker = backup.data.trackerData ? ` (${backup.data.trackerData.bills.length} tracker bills)` : '';
+                const confirmMsg = `Restore from local backup?\n\nType: ${typeStr} Backup\nCreated: ${new Date(backup.timestamp).toLocaleString()}\nBills: ${backup.data.recurringBills.length} recurring bills${hasTracker}\n\nThis will replace your current settings.`;
+                
+                if (confirm(confirmMsg)) {
+                    debugLog('User confirmed restore, proceeding...');
+                    
+                    // For LocalStorage restore, we want to restore everything available
+                    const hasTrackerData = backup.data.trackerData && backup.data.trackerData.bills && backup.data.trackerData.bills.length > 0;
+                    
+                    debugLog('Setting up restore options:', {
+                        restoreSettings: true,
+                        restoreBills: true,
+                        restoreTrackerData: hasTrackerData,
+                        trackerDataAvailable: hasTrackerData
+                    });
+                    
+                    // Create temporary restore options for LocalStorage restore
+                    const tempContainer = document.createElement('div');
+                    tempContainer.innerHTML = `
+                        <input type="checkbox" id="tempRestoreSettings" checked style="display:none;">
+                        <input type="checkbox" id="tempRestoreBills" checked style="display:none;">
+                        <input type="checkbox" id="tempRestoreTrackerData" ${hasTrackerData ? 'checked' : ''} style="display:none;">
+                        <select id="tempRestoreMode" style="display:none;">
+                            <option value="replace" selected>replace</option>
+                        </select>
+                    `;
+                    document.body.appendChild(tempContainer);
+                    
+                    // Temporarily override the restore element IDs
+                    const originalGetElement = document.getElementById;
+                    document.getElementById = function(id) {
+                        switch(id) {
+                            case 'restoreSettings': return document.querySelector('#tempRestoreSettings');
+                            case 'restoreBills': return document.querySelector('#tempRestoreBills');
+                            case 'restoreTrackerData': return document.querySelector('#tempRestoreTrackerData');
+                            case 'restoreMode': return document.querySelector('#tempRestoreMode');
+                            default: return originalGetElement.call(this, id);
+                        }
+                    };
+                    
+                    try {
+                        // Perform the restore
+                        debugLog('Calling restoreFromBackupData with:', backup.data);
+                        restoreFromBackupData(backup.data, 'replace');
+                    } finally {
+                        // Restore original getElementById and cleanup
+                        document.getElementById = originalGetElement;
+                        tempContainer.remove();
+                    }
+                }
+            } catch (error) {
+                debugLog('Error restoring from local backup:', error);
+                alert('Error restoring backup: ' + error.message);
+                console.error('LocalStorage restore error:', error);
+            }
+        }
+        
+        function performRestore() {
+            if (!window.restoreFile) {
+                alert('Please select a backup file first.');
+                return;
+            }
+            
+            const restoreMode = document.getElementById('restoreMode').value;
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const backupData = JSON.parse(e.target.result);
+                    
+                    // Validate backup format
+                    if (!backupData.metadata || !backupData.configuration) {
+                        throw new Error('Invalid backup file format');
+                    }
+                    
+                    const confirmMsg = `Restore from backup file?\n\nCreated: ${new Date(backupData.metadata.timestamp).toLocaleString()}\nType: ${backupData.metadata.type}\nMode: ${restoreMode}\n\nThis will update your current settings.`;
+                    
+                    if (confirm(confirmMsg)) {
+                        restoreFromBackupData(backupData, restoreMode);
+                    }
+                } catch (error) {
+                    debugLog('Error parsing backup file:', error);
+                    alert('Error reading backup file: ' + error.message);
+                }
+            };
+            
+            reader.readAsText(window.restoreFile);
+        }
+        
+        function restoreFromBackupData(backupData, mode) {
+            try {
+                const restoreSettings = document.getElementById('restoreSettings')?.checked !== false;
+                const restoreBills = document.getElementById('restoreBills')?.checked !== false;
+                const restoreTrackerData = document.getElementById('restoreTrackerData')?.checked === true;
+                
+                // Restore configuration
+                if (restoreSettings && backupData.configuration) {
+                    if (mode === 'replace' || !config.billsPath) {
+                        config.billsPath = backupData.configuration.billsPath || config.billsPath;
+                        config.trackerPath = backupData.configuration.trackerPath || config.trackerPath;
+                        config.backupPath = backupData.configuration.backupPath || config.backupPath;
+                        config.daysWarning = backupData.configuration.daysWarning || config.daysWarning;
+                    }
+                    
+                    // Restore email configuration
+                    if (backupData.configuration.emailConfig) {
+                        const emailConfig = backupData.configuration.emailConfig;
+                        config.emailEnabled = emailConfig.enabled;
+                        config.emailAddress = emailConfig.emailAddress || config.emailAddress;
+                        config.smtpServer = emailConfig.smtpServer || config.smtpServer;
+                        config.smtpPort = emailConfig.smtpPort || config.smtpPort;
+                        config.emailUsername = emailConfig.username || config.emailUsername;
+                        if (emailConfig.password) {
+                            config.emailPassword = emailConfig.password;
+                        }
+                        config.dailySummary = emailConfig.dailySummary;
+                        config.dueSoonAlerts = emailConfig.dueSoonAlerts;
+                        config.overdueWarnings = emailConfig.overdueWarnings;
+                        config.summaryTime = emailConfig.summaryTime || config.summaryTime;
+                        config.alertDaysAhead = emailConfig.alertDaysAhead || config.alertDaysAhead;
+                    }
+                }
+                
+                // Restore recurring bills
+                if (restoreBills && backupData.recurringBills) {
+                    if (mode === 'replace') {
+                        config.recurringBills = backupData.recurringBills;
+                    } else {
+                        // Merge mode - avoid duplicates by name
+                        const existingNames = config.recurringBills.map(b => b.name.toLowerCase());
+                        const newBills = backupData.recurringBills.filter(b => 
+                            !existingNames.includes(b.name.toLowerCase())
+                        );
+                        config.recurringBills = [...config.recurringBills, ...newBills];
+                    }
+                }
+                
+                // Restore tracker data
+                if (restoreTrackerData && backupData.trackerData) {
+                    allBills = backupData.trackerData.bills || [];
+                    categories = new Set(backupData.trackerData.categories || []);
+                    
+                    // Use original content if available, otherwise reconstruct
+                    let restoredContent = backupData.trackerData.originalContent;
+                    if (!restoredContent) {
+                        restoredContent = allBills.map(bill => bill.line || 
+                            `${bill.status} ${bill.date} ${bill.name}${bill.category ? ' [' + bill.category + ']' : ''}${bill.amount ? ' ;; ' + bill.amount : ''}`
+                        ).join('\n');
+                    }
+                    
+                    // Create a proper File object that can be used for refresh operations
+                    const restoredBlob = new Blob([restoredContent], { type: 'text/plain' });
+                    currentFile = new File([restoredBlob], backupData.trackerData.filename || 'Restored_BillFlow.txt', {
+                        type: 'text/plain',
+                        lastModified: backupData.trackerData.lastModified || Date.now()
+                    });
+                    fileLastModified = currentFile.lastModified;
+                    
+                    debugLog('Restored tracker data with proper file object', { 
+                        filename: currentFile.name, 
+                        size: currentFile.size,
+                        billCount: allBills.length,
+                        hasOriginalContent: !!backupData.trackerData.originalContent
+                    });
+                }
+                
+                // Save all changes to localStorage
+                localStorage.setItem('billflow_billsPath', config.billsPath);
+                localStorage.setItem('billflow_trackerPath', config.trackerPath);
+                localStorage.setItem('billflow_backupPath', config.backupPath);
+                localStorage.setItem('billflow_daysWarning', config.daysWarning);
+                localStorage.setItem('billflow_emailEnabled', config.emailEnabled);
+                localStorage.setItem('billflow_emailAddress', config.emailAddress);
+                localStorage.setItem('billflow_smtpServer', config.smtpServer);
+                localStorage.setItem('billflow_smtpPort', config.smtpPort);
+                localStorage.setItem('billflow_emailUsername', config.emailUsername);
+                localStorage.setItem('billflow_emailPassword', config.emailPassword);
+                localStorage.setItem('billflow_dailySummary', config.dailySummary);
+                localStorage.setItem('billflow_dueSoonAlerts', config.dueSoonAlerts);
+                localStorage.setItem('billflow_overdueWarnings', config.overdueWarnings);
+                localStorage.setItem('billflow_summaryTime', config.summaryTime);
+                localStorage.setItem('billflow_alertDaysAhead', config.alertDaysAhead);
+                localStorage.setItem('billflow_recurringBills', JSON.stringify(config.recurringBills));
+                
+                // Immediately refresh all dashboard components
+                updateStats();
+                if (backupData.trackerData && backupData.trackerData.bills) {
+                    // Generate category data for chart
+                    const categoryData = {};
+                    backupData.trackerData.bills.forEach(bill => {
+                        if (bill.status === 'x' && bill.amount > 0) {
+                            const month = bill.date.substring(0, 7);
+                            if (!categoryData[month]) categoryData[month] = {};
+                            categoryData[month][bill.category] = (categoryData[month][bill.category] || 0) + bill.amount;
+                        }
+                    });
+                    updateChart(categoryData);
+                }
+                updateCategoryFilter();
+                filterBills();
+                updateLastUpdateTime();
+                
+                // Refresh bills management section if open
+                if (document.getElementById('billsManagementSection').style.display !== 'none') {
+                    refreshBillsList();
+                }
+                
+                closeModal('backupModal');
+                
+                // Show success message with details
+                const successMsg = document.createElement('div');
+                successMsg.style.cssText = 'position: fixed; top: 20px; right: 20px; background: #4CAF50; color: white; padding: 15px 20px; border-radius: 6px; z-index: 1001;';
+                
+                let restoredItems = [];
+                if (restoreSettings) restoredItems.push('Settings');
+                if (restoreBills) restoredItems.push(`${config.recurringBills.length} Bills`);
+                if (restoreTrackerData && backupData.trackerData) restoredItems.push(`${allBills.length} Tracker Items`);
+                
+                successMsg.textContent = `✅ Restored: ${restoredItems.join(', ')}`;
+                document.body.appendChild(successMsg);
+                
+                setTimeout(() => {
+                    successMsg.remove();
+                }, 4000);
+                
+                debugLog('Restore completed successfully', {
+                    settings: restoreSettings,
+                    bills: config.recurringBills.length,
+                    tracker: allBills.length,
+                    mode: mode
+                });
+                
+            } catch (error) {
+                debugLog('Error restoring data:', error);
+                alert('Error restoring data: ' + error.message);
+            }
+        }
+        
+        function clearLocalBackups() {
+            if (confirm('Are you sure you want to clear all local backups?\n\nThis action cannot be undone.')) {
+                localStorage.removeItem('billflow_localBackups');
+                loadLocalBackupsList();
+                
+                const successMsg = document.createElement('div');
+                successMsg.style.cssText = 'position: fixed; top: 20px; right: 20px; background: #f44336; color: white; padding: 15px 20px; border-radius: 6px; z-index: 1001;';
+                successMsg.textContent = `🗑️ Local backups cleared`;
+                document.body.appendChild(successMsg);
+                
+                setTimeout(() => {
+                    successMsg.remove();
+                }, 3000);
+            }
+        }
+        
+        function showHelpModal() {
+            debugLog('Showing help modal');
+            showModal('helpModal');
+        }
+        
+        function showAboutModal() {
+            debugLog('Showing about modal');
+            showModal('aboutModal');
+        }
+        
+        function payBill(billIndex, billName, originalDate) {
+            debugLog('Paying bill:', { billIndex, billName, originalDate });
+            
+            if (billIndex < 0 || billIndex >= allBills.length) {
+                alert('Invalid bill selection.');
+                return;
+            }
+            
+            const bill = allBills[billIndex];
+            const today = new Date().toISOString().substring(0, 10);
+            
+            const confirmMsg = `Mark "${billName}" as paid?\n\nDue Date: ${originalDate}\nPaid Date: ${today}\n\nThis will update the bill status to paid.`;
+            
+            if (confirm(confirmMsg)) {
+                // Update the bill status and add payment date
+                bill.status = 'x';
+                const paymentDate = today;
+                
+                // Update the bill line to include payment date
+                if (bill.line) {
+                    // Insert payment date after the original date
+                    const parts = bill.line.split(' ');
+                    if (parts.length >= 3) {
+                        parts.splice(2, 0, paymentDate);
+                        bill.line = parts.join(' ');
+                    }
+                } else {
+                    // Reconstruct line with payment date
+                    bill.line = `x ${originalDate} ${paymentDate} ${bill.name}${bill.category ? ' [' + bill.category + ']' : ''}${bill.amount ? ' ;; ' + bill.amount : ''}`;
+                }
+                
+                // Update the file content for refresh functionality
+                if (currentFile) {
+                    const allLines = allBills.map(b => b.line).join('\n');
+                    const updatedBlob = new Blob([allLines], { type: 'text/plain' });
+                    currentFile = new File([updatedBlob], currentFile.name, {
+                        type: 'text/plain',
+                        lastModified: Date.now()
+                    });
+                    fileLastModified = currentFile.lastModified;
+                }
+                
+                // Save to localStorage for backup
+                const paidBills = JSON.parse(localStorage.getItem('billflow_paidBills') || '[]');
+                paidBills.unshift({
+                    name: billName,
+                    originalDate: originalDate,
+                    paymentDate: paymentDate,
+                    amount: bill.amount,
+                    category: bill.category,
+                    timestamp: new Date().toISOString()
+                });
+                
+                // Keep only last 100 paid bills
+                if (paidBills.length > 100) {
+                    paidBills.splice(100);
+                }
+                
+                localStorage.setItem('billflow_paidBills', JSON.stringify(paidBills));
+                
+                // Refresh all dashboard components
+                updateStats();
+                
+                // Regenerate category data for chart
+                const categoryData = {};
+                allBills.forEach(bill => {
+                    if (bill.status === 'x' && bill.amount > 0) {
+                        const month = bill.date.substring(0, 7);
+                        if (!categoryData[month]) categoryData[month] = {};
+                        categoryData[month][bill.category] = (categoryData[month][bill.category] || 0) + bill.amount;
+                    }
+                });
+                updateChart(categoryData);
+                
+                updateCategoryFilter();
+                filterBills();
+                updateLastUpdateTime();
+                
+                // Show success message with export reminder
+                const successMsg = document.createElement('div');
+                successMsg.style.cssText = 'position: fixed; top: 20px; right: 20px; background: #4CAF50; color: white; padding: 15px 20px; border-radius: 6px; z-index: 1001; max-width: 300px;';
+                successMsg.innerHTML = `
+                    <div style="margin-bottom: 10px;">✅ Paid "${billName}"</div>
+                    <div style="font-size: 0.9em; margin-bottom: 15px;">Remember to update your BillFlow.txt file with these changes.</div>
+                    <button onclick="exportTrackerData(); this.parentElement.remove();" style="background: #45a049; border: none; color: white; padding: 5px 10px; border-radius: 4px; cursor: pointer; margin-right: 10px;">
+                        Export Data
+                    </button>
+                    <button onclick="this.parentElement.remove();" style="background: #666; border: none; color: white; padding: 5px 10px; border-radius: 4px; cursor: pointer;">
+                        Close
+                    </button>
+                `;
+                document.body.appendChild(successMsg);
+                
+                setTimeout(() => {
+                    if (successMsg.parentNode) {
+                        successMsg.remove();
+                    }
+                }, 10000);
+                
+                debugLog('Bill marked as paid successfully', {
+                    billName,
+                    originalDate,
+                    paymentDate,
+                    totalPaidBills: paidBills.length
+                });
+            }
+        }
+        
+        function exportTrackerData() {
+            if (!currentFile || allBills.length === 0) {
+                alert('No tracker data to export. Please load a BillFlow file first.');
+                return;
+            }
+            
+            const content = allBills.map(bill => bill.line).join('\n');
+            const blob = new Blob([content], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = currentFile.name || 'BillFlow_Updated.txt';
+            a.click();
+            
+            // Show export confirmation
+            const exportMsg = document.createElement('div');
+            exportMsg.style.cssText = 'position: fixed; top: 20px; right: 20px; background: #2196F3; color: white; padding: 15px 20px; border-radius: 6px; z-index: 1001;';
+            exportMsg.textContent = `📤 Exported: ${currentFile.name || 'BillFlow_Updated.txt'}`;
+            document.body.appendChild(exportMsg);
+            
+            setTimeout(() => {
+                exportMsg.remove();
+            }, 3000);
+        }
+        
+        // Core parsing and display functions
+        function parseTrackerFile(content) {
+            debugLog('Parsing tracker file content');
+            const lines = content.split('\n');
+            const bills = [];
+            const monthlyData = {};
+            const categoryData = {};
+            
+            lines.forEach((line, lineIndex) => {
+                // Skip empty lines or comment lines
+                if (!line.trim() || line.startsWith('#')) return;
+                
+                // Check if it's a bill line
+                if (line.match(/^[*YR=x]/i)) {
+                    const status = line[0].toLowerCase() === 'x' ? 'x' : line[0];
+                    
+                    // Remove status and leading space
+                    let remaining = line.substring(2).trim();
+                    
+                    // Initialize variables
+                    let date = null;
+                    let name = '';
+                    let category = 'Uncategorized';
+                    let amount = 0;
+                    
+                    // Try to extract dates - handle various formats
+                    let dateCount = 0;
+                    let workingString = remaining;
+                    
+                    // First, try to extract valid dates at the beginning
+                    while (true) {
+                        // Match YYYY-MM-DD format
+                        const dateMatch = workingString.match(/^(\d{4}-\d{2}-\d{2})\s*(.*)$/);
+                        if (dateMatch) {
+                            if (dateCount === 0) {
+                                date = dateMatch[1];
+                            }
+                            dateCount++;
+                            workingString = dateMatch[2];
+                            continue;
+                        }
+                        
+                        // Match MM-DD-YY format and skip it
+                        const shortDateMatch = workingString.match(/^(\d{2}-\d{2}-\d{2})\s*(.*)$/);
+                        if (shortDateMatch) {
+                            workingString = shortDateMatch[2];
+                            continue;
+                        }
+                        
+                        // Match incomplete dates like 2023-07-XX or ???
+                        const incompleteDateMatch = workingString.match(/^([\d\?]{2,4}-[\d\?X]{2}-[\d\?X]{2}|\?\?\?)\s*(.*)$/);
+                        if (incompleteDateMatch) {
+                            workingString = incompleteDateMatch[2];
+                            continue;
+                        }
+                        
+                        break;
+                    }
+                    
+                    // Skip if no valid date found
+                    if (!date) {
+                        debugLog(`Line ${lineIndex + 1}: No valid date found in: ${line}`);
+                        return;
+                    }
+                    
+                    // For lines that start with ";;" (like tax refunds)
+                    if (workingString.startsWith(';;')) {
+                        workingString = workingString.substring(2).trim();
+                    }
+                    
+                    // Now parse the rest - split by ;; to separate amount if present
+                    const parts = workingString.split(';;');
+                    const beforeAmount = parts[0].trim();
+                    
+                    // Extract amount if present
+                    if (parts.length > 1) {
+                        const amountPart = parts[1].trim();
+                        
+                        // Handle complex amount formats
+                        // First try simple number
+                        let amountMatch = amountPart.match(/^([\d,]+\.?\d*)/);
+                        if (amountMatch) {
+                            amount = parseFloat(amountMatch[1].replace(/[,$]/g, '')) || 0;
+                        } else {
+                            // Try formats like "PAID = 5000.00"
+                            amountMatch = amountPart.match(/(?:PAID\s*=\s*)?([\d,]+\.?\d*)/);
+                            if (amountMatch) {
+                                amount = parseFloat(amountMatch[1].replace(/[,$]/g, '')) || 0;
+                            }
+                        }
+                    }
+                    
+                    // Extract name and category from beforeAmount
+                    const categoryMatch = beforeAmount.match(/^(.+?)\s*\[([^\]]+)\]$/);
+                    if (categoryMatch) {
+                        name = categoryMatch[1].trim();
+                        category = categoryMatch[2].trim();
+                    } else {
+                        // No category found, whole thing is the name
+                        name = beforeAmount;
+                    }
+                    
+                    // Skip if no name
+                    if (!name) {
+                        debugLog(`Line ${lineIndex + 1}: No name found in: ${line}`);
+                        return;
+                    }
+                    
+                    categories.add(category);
+                    
+                    bills.push({
+                        status,
+                        date,
+                        name,
+                        category,
+                        amount,
+                        line
+                    });
+                    
+                    // Aggregate monthly data for paid bills with amounts
+                    if (status === 'x' && amount > 0) {
+                        const month = date.substring(0, 7);
+                        if (!categoryData[month]) categoryData[month] = {};
+                        categoryData[month][category] = (categoryData[month][category] || 0) + amount;
+                    }
+                }
+            });
+            
+            debugLog(`Parsed ${bills.length} bills from ${lines.length} lines`);
+            
+            return { bills, monthlyData, categoryData };
+        }
+        
+        function getStatusInfo(status) {
+            switch(status) {
+                case 'R': return { class: 'overdue', name: 'Overdue' };
+                case 'Y': return { class: 'due-soon', name: 'Due Soon' };
+                case '*': return { class: 'upcoming', name: 'Unpaid' };
+                case '=': return { class: 'scheduled', name: 'Auto-Pay' };
+                case 'x': return { class: 'paid', name: 'Paid' };
+                default: return { class: 'upcoming', name: 'Unknown' };
+            }
+        }
+        
+        function updateStats() {
+            debugLog('Updating statistics');
+            const activeBills = allBills.filter(b => b.status !== 'x');
+            document.getElementById('totalBills').textContent = activeBills.length;
+            document.getElementById('upcomingBills').textContent = allBills.filter(b => b.status === '*').length;
+            document.getElementById('dueSoonBills').textContent = allBills.filter(b => b.status === 'Y').length;
+            document.getElementById('scheduledBills').textContent = allBills.filter(b => b.status === '=').length;
+            
+            const currentMonth = new Date().toISOString().substring(0, 7);
+            const monthlyBills = activeBills.filter(b => b.date.startsWith(currentMonth));
+            const monthlyTotal = monthlyBills.reduce((sum, b) => sum + (b.amount || 0), 0);
+            document.getElementById('monthlyTotal').textContent = '$' + monthlyTotal.toFixed(2);
+        }
+        
+        function updateChart(categoryData) {
+            debugLog('Updating chart');
+            const ctx = document.getElementById('spendingChart').getContext('2d');
+            
+            const allMonths = Object.keys(categoryData).sort();
+            if (allMonths.length === 0) return;
+            
+            const monthsToShow = allMonths.slice(-12);
+            
+            const labels = monthsToShow.map(m => {
+                const [year, month] = m.split('-');
+                return new Date(year, month - 1).toLocaleDateString('en-US', { month: 'short', year: '2-digit' });
+            });
+            
+            const categoriesInRange = new Set();
+            monthsToShow.forEach(month => {
+                Object.keys(categoryData[month] || {}).forEach(cat => categoriesInRange.add(cat));
+            });
+            
+            const categoryTotals = {};
+            Array.from(categoriesInRange).forEach(cat => {
+                categoryTotals[cat] = monthsToShow.reduce((sum, month) => 
+                    sum + (categoryData[month]?.[cat] || 0), 0);
+            });
+            
+            const sortedCategories = Object.keys(categoryTotals)
+                .sort((a, b) => categoryTotals[b] - categoryTotals[a]);
+            
+            const colors = [
+                '#2196F3', '#4CAF50', '#FF9800', '#F44336', '#9C27B0', 
+                '#00BCD4', '#FFC107', '#795548', '#607D8B', '#E91E63',
+                '#3F51B5', '#009688', '#FF5722', '#CDDC39', '#8BC34A'
+            ];
+            
+            const datasets = sortedCategories.map((category, index) => ({
+                label: category,
+                data: monthsToShow.map(month => categoryData[month]?.[category] || 0),
+                backgroundColor: colors[index % colors.length],
+                borderColor: colors[index % colors.length],
+                borderWidth: 1
+            }));
+            
+            if (chart) {
+                chart.destroy();
+            }
+            
+            chart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: datasets
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: {
+                        mode: 'index',
+                        intersect: false
+                    },
+                    scales: {
+                        x: {
+                            stacked: true,
+                        },
+                        y: {
+                            stacked: true,
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value) {
+                                    return '$' + value.toLocaleString();
+                                }
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                padding: 10,
+                                boxWidth: 12
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                footer: function(context) {
+                                    let sum = 0;
+                                    context.forEach(function(tooltipItem) {
+                                        sum += tooltipItem.raw;
+                                    });
+                                    return 'Total: $' + sum.toLocaleString();
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        
+        function toggleChart() {
+            debugLog('Toggling chart visibility');
+            const container = document.getElementById('chartContainer');
+            const toggleText = document.getElementById('chartToggleText');
+            
+            if (container.classList.contains('collapsed')) {
+                container.classList.remove('collapsed');
+                toggleText.textContent = 'Hide Chart ▲';
+            } else {
+                container.classList.add('collapsed');
+                toggleText.textContent = 'Show Chart ▼';
+            }
+        }
+        
+        function updateCategoryFilter() {
+            debugLog('Updating category filter');
+            const select = document.getElementById('categoryFilter');
+            select.innerHTML = '<option value="all">All Categories</option>';
+            
+            Array.from(categories).sort().forEach(category => {
+                const option = document.createElement('option');
+                option.value = category;
+                option.textContent = category;
+                select.appendChild(option);
+            });
+        }
+        
+		function displayBills(bills) {
+			debugLog('Displaying bills', { count: bills.length });
+			const billList = document.getElementById('billList');
+			
+			if (bills.length === 0) {
+				billList.innerHTML = '<div style="padding: 40px; text-align: center; color: #666;">No bills match your criteria</div>';
+				return;
+			}
+			
+			billList.innerHTML = bills.map(bill => {
+				const statusInfo = getStatusInfo(bill.status);
+				return `
+					<div class="bill-item">
+						<div class="status-dot ${statusInfo.class}"></div>
+						<div class="bill-name">${bill.name}</div>
+						<div class="bill-category">${bill.category}</div>
+						<div class="bill-date">${bill.date}</div>
+						<div class="bill-amount">${bill.amount > 0 ? '$' + bill.amount.toFixed(2) : '-'}</div>
+						<div class="bill-status">${statusInfo.name}</div>
+						<div class="bill-actions">
+							${statusInfo.name === 'Unpaid' ? '<button class="pay-button" onclick="payBill(\'' + bill.name + '\')">Pay</button>' : ''}
+						</div>
+					</div>
+				`;
+			}).join('');
+			
+			document.getElementById('billCount').textContent = `${bills.length} bills`;
+		}
+        
+        function filterBills() {
+            debugLog('Filtering bills');
+            const monthFilter = document.getElementById('monthFilter').value;
+            const categoryFilter = document.getElementById('categoryFilter').value;
+            const searchTerm = document.getElementById('searchBox').value.toLowerCase();
+            
+            let filtered = allBills;
+            let sectionTitle = 'Active Bills';
+            
+            switch(monthFilter) {
+                case 'active':
+                    filtered = filtered.filter(b => b.status !== 'x');
+                    sectionTitle = 'Active Bills';
+                    break;
+                case 'all':
+                    sectionTitle = 'All Bills';
+                    break;
+                case 'paid':
+                    filtered = filtered.filter(b => b.status === 'x');
+                    sectionTitle = 'Completed Bills';
+                    break;
+                case 'current':
+                    const currentMonth = new Date().toISOString().substring(0, 7);
+                    filtered = filtered.filter(b => b.date.startsWith(currentMonth));
+                    sectionTitle = 'Current Month Bills';
+                    break;
+                case 'next':
+                    const nextMonth = new Date();
+                    nextMonth.setMonth(nextMonth.getMonth() + 1);
+                    const nextMonthStr = nextMonth.toISOString().substring(0, 7);
+                    filtered = filtered.filter(b => b.date.startsWith(nextMonthStr));
+                    sectionTitle = 'Next Month Bills';
+                    break;
+            }
+            
+            document.getElementById('billSectionTitle').textContent = sectionTitle;
+            
+            if (categoryFilter !== 'all') {
+                filtered = filtered.filter(b => b.category === categoryFilter);
+            }
+            
+            if (searchTerm) {
+                filtered = filtered.filter(b => 
+                    b.name.toLowerCase().includes(searchTerm) ||
+                    b.category.toLowerCase().includes(searchTerm)
+                );
+            }
+            
+            filtered.sort((a, b) => {
+                if (monthFilter === 'paid' || monthFilter === 'all') {
+                    if (a.date === b.date) {
+                        const statusOrder = {'R': 0, 'Y': 1, '*': 2, '=': 3, 'x': 4};
+                        return (statusOrder[a.status] || 5) - (statusOrder[b.status] || 5);
+                    }
+                    return b.date.localeCompare(a.date);
+                } else {
+                    if (a.date === b.date) {
+                        const statusOrder = {'R': 0, 'Y': 1, '*': 2, '=': 3};
+                        return (statusOrder[a.status] || 4) - (statusOrder[b.status] || 4);
+                    }
+                    return a.date.localeCompare(b.date);
+                }
+            });
+            
+            displayBills(filtered);
+        }
+        
+        function handleFileLoad(event) {
+            loadFile(event);
+        }
+        
+        function loadFile(event) {
+            debugLog('Loading file');
+            const file = event.target.files[0];
+            if (!file) return;
+            
+            currentFile = file;
+            fileLastModified = file.lastModified;
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                debugLog('File content loaded, parsing...');
+                try {
+                    const result = parseTrackerFile(e.target.result);
+                    allBills = result.bills;
+                    updateStats();
+                    updateChart(result.categoryData);
+                    updateCategoryFilter();
+                    filterBills();
+                    updateLastUpdateTime();
+                    debugLog('File processed successfully', { billCount: result.bills.length });
+                } catch (error) {
+                    debugLog('Error processing file:', error);
+                    alert('Error processing file: ' + error.message);
+                }
+            };
+            reader.readAsText(file);
+        }
+        
+        function refreshData() {
+            debugLog('Refreshing data');
+            if (!currentFile) {
+                alert('Please load a file first');
+                return;
+            }
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const result = parseTrackerFile(e.target.result);
+                    allBills = result.bills;
+                    updateStats();
+                    updateChart(result.categoryData);
+                    updateCategoryFilter();
+                    filterBills();
+                    updateLastUpdateTime();
+                    debugLog('Data refreshed successfully');
+                } catch (error) {
+                    debugLog('Error refreshing data:', error);
+                    alert('Error refreshing data: ' + error.message);
+                }
+            };
+            reader.readAsText(currentFile);
+        }
+        
+        function toggleAutoRefresh() {
+            debugLog('Toggling auto-refresh');
+            const toggle = document.getElementById('autoRefreshToggle');
+            const indicator = document.getElementById('refreshIndicator');
+            
+            if (autoRefreshInterval) {
+                clearInterval(autoRefreshInterval);
+                autoRefreshInterval = null;
+                toggle.classList.remove('active');
+                indicator.style.display = 'none';
+                debugLog('Auto-refresh disabled');
+            } else {
+                if (!currentFile) {
+                    alert('Please load a file first');
+                    return;
+                }
+                
+                autoRefreshInterval = setInterval(() => {
+                    refreshData();
+                }, 30000);
+                
+                toggle.classList.add('active');
+                indicator.style.display = 'block';
+                refreshData();
+                debugLog('Auto-refresh enabled');
+            }
+        }
+        
+        function updateLastUpdateTime() {
+            const now = new Date();
+            document.getElementById('lastUpdate').textContent = 
+                `Last updated: ${now.toLocaleTimeString()}`;
+        }
+        
+		function payBill(billName) {
+			// Handle bill payment logic here
+			console.log('Paying bill:', billName);
+			// You could update the bill status, redirect to a payment page, etc.
+		}
+		
+        // Initialize on load
+        window.onload = function() {
+            debugLog('Dashboard initialized');
+            // Show welcome message if first time
+            if (!localStorage.getItem('billflow_welcomed')) {
+                localStorage.setItem('billflow_welcomed', 'true');
+                setTimeout(function() {
+                    alert('Welcome to BillFlow! Click the ☰ menu to get started with configuration.');
+                }, 500);
+            }
+        };
+        
+        // Add error handling
+        window.onerror = function(msg, url, lineNo, columnNo, error) {
+            debugLog('JavaScript Error:', { msg, url, lineNo, columnNo, error });
+            console.error('BillFlow Error:', msg, 'at', lineNo + ':' + columnNo);
+            return false;
+        };
+    </script>
+</body>
+>>>>>>> 05c9f4c64561db14cd93095d8b925f6c6720d9c1
 </html>
