@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # BillFlow - Personal Bill Management System
 
 <div align="center">
